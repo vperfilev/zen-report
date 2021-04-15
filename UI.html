@@ -29,7 +29,73 @@
           </div>
         </div>
         <div class="flex items-stretch">
-          <div class="w-1/5 bg-yellow-200">report column</div>
+          <!-- report column -->
+          <div class="w-1/5 border-r-2 border-gray-300">
+            <div class="divide-y-2 divide-gray-300 truncate pr-2 w-full">
+              <div class="text-xl">Доходы</div>
+              <div class="flex">
+                <span class="flex-grow truncate text-gray-700">Зарплата</span>
+                <span class="text-gray-700">111 111.00</span>
+              </div>
+              <div class="flex">
+                <span class="flex-grow text-gray-700">Прочее</span>
+                <span class="text-gray-700">111 111.00</span>
+              </div>
+              <div class="flex">
+                <span class="flex-grow text-gray-700">Отложено</span>
+                <span class="text-gray-700">111 111.00</span>
+              </div>
+              <div class="flex">
+                <span class="flex-grow text-gray-900">Итого:</span>
+                <span class="text-gray-900">111 111.00</span>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="justify-self-end pr-2">
+                <button class="w-20 bg-blue-600 text-white border-2 rounded-sm hover:border-blue-900">Добавить</button><button class="w-20 bg-red-600 text-white border-2 rounded-sm hover:border-red-900">Удалить</button>
+              </div>
+            </div>
+            
+            <div class="mt-5 divide-y-2 divide-gray-300 truncate pr-2 w-full">
+              <div class="text-xl">Расходы</div>
+              <div class="flex">
+                <span class="flex-grow truncate text-gray-700">Группа 1</span>
+                <span class="text-gray-700">111 111.00</span>
+              </div>
+              <div class="flex bg-blue-600">
+                <span class="flex-grow text-white">Прочее</span>
+                <span class="text-white">111 111.00</span>
+              </div>
+              <div class="flex">
+                <span class="flex-grow text-gray-900">Итого:</span>
+                <span class="text-gray-900">111 111.00</span>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="justify-self-end pr-2">
+                <button class="w-20 bg-blue-600 text-white border-2 rounded-sm hover:border-blue-900">Добавить</button><button class="w-20 bg-red-600 text-white border-2 rounded-sm hover:border-red-900">Удалить</button>
+              </div>
+            </div>
+
+            <div class="mt-5 divide-y-2 divide-gray-300 truncate pr-2 w-full">
+              <div class="text-xl">Баланс</div>
+              <div class="flex">
+                <span class="flex-grow truncate text-gray-700">Доход</span>
+                <span class="text-gray-700">111 111.00</span>
+              </div>
+              <div class="flex">
+                <span class="flex-grow text-gray-700">Расход</span>
+                <span class="text-gray-700">111 111.00</span>
+              </div>
+              <div class="flex">
+                <span class="flex-grow text-gray-900">Баланс:</span>
+                <span class="text-gray-900">111 111.00</span>
+              </div>
+            </div>
+
+            <button class="bg-blue-600 text-white border-2 rounded-sm hover:border-blue-900 w-full">Скопировать</button>
+            
+          </div>
 
           <!-- operation columns -->
           <div class="flex-grow divide-y-2 divide-gray-300 mx-3 truncate">
@@ -85,7 +151,68 @@
           </div>
 
           <!-- Details columns -->
-          <div class="w-1/5 border-2 rounded-md filter drop-shadow-2xl">details column</div>
+          <div class="w-1/5 border-l-2 pl-2 border-gray-300">
+          <div>
+            <div class="text-xl">Счета</div>
+            <div class="flex">
+              <div class="w-1 bg-red-200 mr-1"></div>
+              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
+                <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
+                <svg class="fill-current hidden w-3 h-3 text-blue-800 pointer-events-none" viewBox="0 0 20 20">
+                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                </svg>
+              </div>
+              <span class="flex-grow text-gray-600 truncate">ВТБ</span>
+            </div>
+            <div class="flex">
+              <div class="w-1 bg-green-500 mr-1"></div>
+              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
+                <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
+                <svg class="fill-current hidden w-3 h-3 text-blue-800 pointer-events-none" viewBox="0 0 20 20">
+                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                </svg>
+              </div>
+              <span class="flex-grow text-gray-600 truncate">Сбербанк</span>
+            </div>
+            <div class="flex">
+              <div class="w-1 bg-indigo-800 mr-1"></div>
+              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
+                <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
+                <svg class="fill-current hidden w-3 h-3 text-blue-800 pointer-events-none" viewBox="0 0 20 20">
+                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                </svg>
+              </div>
+              <span class="flex-grow text-gray-600 truncate">Кошелек</span>
+            </div>
+          </div>
+          <div class="divide-y-2 divide-gray-300">
+            <div class="text-xl mt-5">Детали</div>
+            <div class="flex">
+              <div class="text-gray-900 mr-2 font-bold">Дата: </div>
+              <span class="text-gray-600">21.04, СБ</span>
+            </div>
+            <div class="flex">
+              <div class="text-gray-900 mr-2 font-bold">Сумма:</div>
+              <span class="text-gray-600">1123.00</span>
+            </div>
+            <div>
+          <span class="text-gray-900 mr-2 font-bold">Категория: </span>
+            <span class="text-gray-600">Быт / Продукты</span>
+          </div>
+          <div>
+            <span class="text-gray-900 mr-2 font-bold">Счет: </span>
+              <span class="text-gray-500">VTB</span>
+            </div>
+            <div>
+            <span class="text-gray-900 mr-2 font-bold">Место:</span>
+            <span class="text-gray-500 text-sm">Agrotorg</span>
+          </div>
+          <div>
+            <span class="text-gray-900 mr-2 font-bold">Коментарий:</span>
+            <span class="text-gray-500 text-sm font-thin">Длинный текст с пояснением что это за покупка и для чего она</span>
+          </div>
+          </div>
+          </div>
         </div>
       </div>
     </div>
