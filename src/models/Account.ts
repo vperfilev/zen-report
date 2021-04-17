@@ -1,5 +1,5 @@
 export interface Account {
-    id: string,
     name: string,
-    colour: string
+    colour: string,
+    isSelected: boolean
 }

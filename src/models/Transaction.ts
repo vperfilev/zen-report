@@ -6,5 +6,6 @@ export interface Transaction {
     account: string,
     place: string,
     comment: string,
-    id: string
+    id: string,
+    reportId: string|undefined,
 }

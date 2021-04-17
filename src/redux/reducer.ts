@@ -1,37 +1,97 @@
+import { ReportType } from "../models/ReportType";
 import { Transaction, Account, ReportRow } from "./../models";
-import { ActionTypes, PUT_TRANSACTIONS, SELECT_REPORT_ROW } from "./actions";
+import {
+  ACCOUNT_SELECTION_CHANGE,
+  ActionTypes,
+  ADD_REPORT_ROW,
+  DELETE_REPORT_ROW,
+  PUT_TRANSACTIONS,
+  SELECT_REPORT_ROW,
+  SELECT_TRANSACTION,
+} from "./actions";
+import store from "./store";
 
 export interface State {
-    transactions: Transaction[],
-    accounts: Account[],
-    selectedAccounts: string[],
-    selectedReportRowId: string,
-    incomeReport: ReportRow[],
-    outcomeReport: ReportRow[],
-    selectedTransactionId: string
+  transactions: Transaction[];
+  accounts: Account[];
+  selectedReportRowId: string;
+  incomeReport: ReportRow[];
+  outcomeReport: ReportRow[];
+  selectedTransactionId: string;
 }
 
 const initialState: State = {
-    accounts:[],
-    incomeReport: [],
-    outcomeReport: [],
-    selectedAccounts: [],
-    selectedReportRowId: "",
-    selectedTransactionId: "",
-    transactions: []
+  accounts: [],
+  incomeReport: [],
+  outcomeReport: [],
+  selectedReportRowId: "",
+  selectedTransactionId: "",
+  transactions: [],
 };
 
-export default function reducer(state = initialState, action: ActionTypes): State {
-    switch (action.type) {
-        case PUT_TRANSACTIONS: {
-            return {...state, transactions: action.payload}
-        }
+export default function reducer(
+  state = initialState,
+  action: ActionTypes
+): State {
+  switch (action.type) {
+    case PUT_TRANSACTIONS: {
+        const colorList:string[] = ["#C0C0C0", "#808080", "#FF0000", "#800000",
+            "#FFFF00", "#808000", "#00FF00", "#008000",
+            "#00FFFF", "#008080", "#0000FF", "#000080",
+            "#FF00FF", "#800080"];
 
-        case SELECT_REPORT_ROW: {
-            return {...state, selectedReportRowId: action.payload}
-        }
-        
-        default:
-      return state;
+        const accounts: Account[] = action.payload
+            .map(t => t.account)
+            .filter((value, index, self) => self.indexOf(value) === index)
+            .map((name, index) => ({name, isSelected:true, colour: colorList[index % colorList.length]}));
+
+      return { ...state, transactions: action.payload, accounts: accounts };
     }
+
+    case SELECT_REPORT_ROW: {
+        const reportRowId = action.payload;
+        if (state.incomeReport.findIndex(x=>x.id === reportRowId) === -1 &&
+            state.outcomeReport.findIndex(x=>x.id === reportRowId) === -1){
+                return state;
+            }
+      return { ...state, selectedReportRowId: reportRowId };
+    }
+
+    case ADD_REPORT_ROW: {
+      if (action.payload.reportType === ReportType.income) {
+        return {
+          ...state,
+          incomeReport: [...state.incomeReport, action.payload.row],
+        };
+      } else {
+        return {
+          ...state,
+          outcomeReport: [...state.outcomeReport, action.payload.row],
+        };
+      }
+    }
+
+    case DELETE_REPORT_ROW: {
+      return {
+        ...state,
+        incomeReport: state.incomeReport.filter((r) => r.id !== action.payload),
+        outcomeReport: state.outcomeReport.filter((r) => r.id !== action.payload),
+      };
+    }
+
+    case SELECT_TRANSACTION: {
+        if (state.transactions.findIndex(t => t.id === action.payload) === -1){
+            return state;
+        }
+        return {...state, selectedTransactionId: action.payload};
+    }
+
+    case ACCOUNT_SELECTION_CHANGE: {
+      return {...state, accounts: state.accounts.map(account => account.name === action.payload.accountId ?
+        {...account, isSelected: action.payload.selection} : account)}
+    }
+
+    default:
+      return state;
+  }
 }
