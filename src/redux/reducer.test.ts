@@ -1,7 +1,7 @@
 import { ActionTypes } from "./actions";
 import reducer, { State } from "./reducer";
 import { createStore, Store } from "redux";
-import { AccountSelectionChange, AddReportRow, DeleteReportRow, PutTransactions, SelectReportRow, SelectTransaction } from "./actionCreators";
+import { AccountSelectionChange, AddReportRow, AddTransactionsToSelectedReport, DeleteReportRow, PutTransactions, RemoveTransactionsFromSelectedReport, SelectReportRow, SelectTransaction } from "./actionCreators";
 import { ReportType } from "../models/ReportType";
 
 const createStoreWithData = ():Store<State, ActionTypes> => {
@@ -122,11 +122,25 @@ describe("test reducer", () => {
   });
 
   it("RemoveTransactionsFromSelectedReport should remove transactions from selected report", () => {
+    const store = createStoreWithData();
+    const action = RemoveTransactionsFromSelectedReport(["12"]);
 
+    action(store.dispatch);
+
+    const state = store.getState();
+    expect(state.transactions[1].reportId).toBe(undefined);
   });
 
   it("AddTransactionsToSelectedReport should add transactions to selected report", () => {
+    const store = createStoreWithData();
+    SelectReportRow("r2")(store.dispatch);
+    const action = AddTransactionsToSelectedReport(["2"]);
 
+    action(store.dispatch);
+
+    const state = store.getState();
+    expect(state.transactions[0].reportId).toBe("r2");
+    expect(state.transactions[1].reportId).toBe("r2");
   });
 
   it("RenameReportName should change report name", () => {

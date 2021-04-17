@@ -43,18 +43,12 @@ export interface RenameReportRowAction {
 
 export interface AddTransactionsToSelectedReportAction {
   type: typeof ADD_TRANSACTIONS_TO_SELECTED_REPORT;
-  payload: {
-    transactionIDs: string[];
-    reportId: string;
-  };
+  payload: string[];
 }
 
 export interface RemoveTransactionsFromSelectedReportAction {
   type: typeof REMOVE_TRANSACTIONS_FROM_SELECTED_REPORT;
-  payload: {
-    transactionIDs: string[];
-    reportId: string;
-  };
+  payload: string[];
 }
 
 export interface AccountSelectionChangeAction {

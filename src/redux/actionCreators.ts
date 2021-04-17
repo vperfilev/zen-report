@@ -84,26 +84,24 @@ export function RenameReportName(
 }
 
 export function AddTransactionsToSelectedReport(
-  transactionIDs: string[],
-  reportId: string
+  transactionIDs: string[]
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
     const action: AddTransactionsToSelectedReportAction = {
       type: ADD_TRANSACTIONS_TO_SELECTED_REPORT,
-      payload: { transactionIDs, reportId },
+      payload: transactionIDs 
     };
     return dispatch(action);
   };
 }
 
 export function RemoveTransactionsFromSelectedReport(
-  transactionIDs: string[],
-  reportId: string
+  transactionIDs: string[]
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
     const action: RemoveTransactionsFromSelectedReportAction = {
       type: REMOVE_TRANSACTIONS_FROM_SELECTED_REPORT,
-      payload: { transactionIDs, reportId },
+      payload: transactionIDs,
     };
     return dispatch(action);
   };

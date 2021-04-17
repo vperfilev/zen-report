@@ -4,8 +4,10 @@ import {
   ACCOUNT_SELECTION_CHANGE,
   ActionTypes,
   ADD_REPORT_ROW,
+  ADD_TRANSACTIONS_TO_SELECTED_REPORT,
   DELETE_REPORT_ROW,
   PUT_TRANSACTIONS,
+  REMOVE_TRANSACTIONS_FROM_SELECTED_REPORT,
   SELECT_REPORT_ROW,
   SELECT_TRANSACTION,
 } from "./actions";
@@ -89,6 +91,28 @@ export default function reducer(
     case ACCOUNT_SELECTION_CHANGE: {
       return {...state, accounts: state.accounts.map(account => account.name === action.payload.accountId ?
         {...account, isSelected: action.payload.selection} : account)}
+    }
+
+    case REMOVE_TRANSACTIONS_FROM_SELECTED_REPORT : {
+      const removeIds = action.payload;
+      const transactions = state.transactions.map(transaction => {
+        if (removeIds.findIndex(r => r === transaction.id) === -1){
+          return transaction;
+        }
+        return {...transaction, reportId: undefined};
+      });
+      return {...state, transactions: transactions};
+    }
+
+    case ADD_TRANSACTIONS_TO_SELECTED_REPORT: {
+      const addedIds = action.payload;
+      const transactions = state.transactions.map(transaction => {
+        if (addedIds.findIndex(r => r === transaction.id) === -1){
+          return transaction;
+        }
+        return {...transaction, reportId: state.selectedReportRowId};
+      });
+      return {...state, transactions: transactions};
     }
 
     default:
