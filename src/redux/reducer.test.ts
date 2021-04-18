@@ -215,7 +215,7 @@ describe("test reducer", () => {
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe(undefined);
+    expect(state.selectedReportRowId).toBe(ReportType.income);
   });
 
   it("DeleteReportRow should select next outcome report row if deleted is selected", () => {
@@ -250,7 +250,7 @@ describe("test reducer", () => {
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe(undefined);
+    expect(state.selectedReportRowId).toBe(ReportType.outcome);
   });
 
   it("DeleteReportRow should remove transactions from the report", () => {

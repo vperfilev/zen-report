@@ -17,7 +17,7 @@ import store from "./store";
 export interface State {
   transactions: Transaction[];
   accounts: Account[];
-  selectedReportRowId: string | undefined;
+  selectedReportRowId: string | ReportType;
   incomeReport: ReportRow[];
   outcomeReport: ReportRow[];
   selectedTransactionId: string;
@@ -27,7 +27,7 @@ const initialState: State = {
   accounts: [],
   incomeReport: [],
   outcomeReport: [],
-  selectedReportRowId: undefined,
+  selectedReportRowId: ReportType.income,
   selectedTransactionId: "",
   transactions: [],
 };
@@ -93,18 +93,18 @@ export default function reducer(
     }
 
     case DELETE_REPORT_ROW: {
-      let selectedReportRowId: string | undefined = state.selectedReportRowId;
+      let selectedReportRowId: string | ReportType = state.selectedReportRowId;
       const id = action.payload;
       if (state.selectedReportRowId === id){
         const incomeIndex = state.incomeReport.findIndex(r => r.id === id);
         if (incomeIndex !== -1) {
           const newIncomeIndex = incomeIndex < (state.incomeReport.length - 1) ? incomeIndex + 1 : incomeIndex - 1;
-          selectedReportRowId = newIncomeIndex < 0 ? undefined : state.incomeReport[newIncomeIndex].id;
+          selectedReportRowId = newIncomeIndex < 0 ? ReportType.income : state.incomeReport[newIncomeIndex].id;
         }else{
           const outcomeIndex = state.outcomeReport.findIndex(r => r.id === id);
           if (outcomeIndex !== -1) {
             const newOutcomeIndex = outcomeIndex < (state.outcomeReport.length - 1) ? outcomeIndex + 1 : outcomeIndex - 1;
-            selectedReportRowId = newOutcomeIndex < 0 ? undefined : state.outcomeReport[newOutcomeIndex].id;
+            selectedReportRowId = newOutcomeIndex < 0 ? ReportType.outcome : state.outcomeReport[newOutcomeIndex].id;
           }
         }
       }

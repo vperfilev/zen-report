@@ -1,4 +1,4 @@
 export enum ReportType {
-    income, 
-    outcome
+    income = "income", 
+    outcome = "outcome"
 }
