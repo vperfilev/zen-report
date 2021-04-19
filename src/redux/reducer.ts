@@ -12,7 +12,6 @@ import {
   SELECT_REPORT_ROW,
   SELECT_TRANSACTION,
 } from "./actions";
-import store from "./store";
 
 export interface State {
   transactions: Transaction[];
@@ -63,7 +62,6 @@ export default function reducer(
           isSelected: true,
           colour: colorList[index % colorList.length],
         }));
-
       return { ...state, transactions: action.payload, accounts: accounts };
     }
 
