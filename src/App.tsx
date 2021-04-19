@@ -1,8 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
-import FilePanel from "./components/FilePanel";
-import { Logo } from "./components/Logo";
-import  store  from "./redux/store";
+import { Logo, AccountsPanel, FilePanel } from "./components";
+import store from "./redux/store";
 
 function App() {
   return (
@@ -10,6 +9,13 @@ function App() {
       <div className="flex mx-6 pb-2 border-b-2">
         <Logo />
         <FilePanel />
+      </div>
+      <div className="flex items-stretch pt-4">
+        <div className="w-1/4 border-gray-300 ml-5 border-r-2 pr-5">1</div>
+        <div className="flex-grow divide-y-2 divide-gray-300 truncate mx-6">2</div>
+        <div className="w-1/4 mr-5 border-l-2 pl-5 border-gray-300">
+          <AccountsPanel/>
+        </div>
       </div>
     </Provider>
   );

@@ -1,4 +1,3 @@
-export * from "./PrimaryButton";
-export * from "./SecondaryButton";
-export * from "./FilePanel";
+export {default as FilePanel} from "./FilePanel";
 export * from "./Logo";
+export {default as AccountsPanel} from "./AccountsPanel";

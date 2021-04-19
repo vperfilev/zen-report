@@ -3,7 +3,7 @@ import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
-import { PrimaryButton, SecondaryButton } from "./";
+import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
 import { Transaction } from "./../models";
 
