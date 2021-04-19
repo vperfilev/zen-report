@@ -9,24 +9,32 @@
     <div class="container mx-auto max-w-6xl bg-white rounded-sm p-2 min-h-screen relative">
       <div>
         <div class="flex mx-6 pb-2 border-b-2">
-          <div class="font-mono font-extrabold text-5xl animate-pulse text-blue-900 mb-2 ml-2 mt-2 mr-2 filter blur-sm">
+          
+          <!-- logo -->
+          <div class="font-mono font-extrabold text-5xl animate-pulse duration-75 text-blue-900 mb-2 ml-2 mt-2 mr-2 filter blur-sm">
             ZenReport
           </div>
           <div class="absolute left-0 top-0 mb-2 mr-2 ml-10 mt-4 font-mono font-extrabold text-5xl text-white">
             ZenReport
           </div>
-          <div class="flex-grow flex self-end mb-3 ml-6 ">
-            <div class=" flex-grow border-2 border-gray-300 mr-1 ml-32 ">
+          <!-- logo -->
+
+          <div class="flex-grow flex self-end mb-3 ml-6">
+            <div class="flex-grow border-2 border-gray-300 mr-1 ml-32">
               fileName.csv
             </div>
             <div class="w-64 flex">
-            <button class="focus:outline-none flex-grow text-white text-sm py-1 mr-1 px-5 bg-blue-900 hover:bg-blue-600 hover:shadow-md">
-              Select file
-            </button>
-            <button class="focus:outline-none text-white flex-grow text-sm py-1 px-5 bg-red-900 hover:bg-red-600 hover:shadow-md">
-              Clear file
-            </button>
-          </div>
+              <button
+                class="focus:outline-none flex-grow text-white text-sm py-1 mr-1 px-5 bg-blue-900 hover:bg-blue-600 hover:shadow-md"
+              >
+                Select file
+              </button>
+              <button
+                class="focus:outline-none text-white flex-grow text-sm py-1 px-5 bg-red-900 hover:bg-red-600 hover:shadow-md"
+              >
+                Clear file
+              </button>
+            </div>
           </div>
         </div>
         <div class="flex items-stretch pt-4">
@@ -52,12 +60,22 @@
               </div>
             </div>
             <div class="flex w-full pr-2 mt-2">
-                <button class="focus:outline-none text-white text-sm py-2 w-5 flex-grow mr-1  bg-blue-900 hover:bg-blue-600 hover:shadow-md">Добавить</button>
-                <button class="focus:outline-none text-white text-sm py-2 w-5 flex-grow  bg-red-900 hover:bg-red-600 hover:shadow-md">Удалить</button>
+              <button
+                class="focus:outline-none text-white text-sm py-2 w-5 flex-grow mr-1 bg-blue-900 hover:bg-blue-600 hover:shadow-md"
+              >
+                Добавить
+              </button>
+              <button
+                class="focus:outline-none text-white text-sm py-2 w-5 flex-grow bg-red-900 hover:bg-red-600 hover:shadow-md"
+              >
+                Удалить
+              </button>
             </div>
-            
+
             <div class="mt-5 divide-y-2 divide-gray-300 truncate pr-2 w-full">
-              <div class="text-xl text-blue-900 font-semibold mb-2">Расходы</div>
+              <div class="text-xl text-blue-900 font-semibold mb-2">
+                Расходы
+              </div>
               <div class="flex py-1 px-2 hover:bg-blue-300">
                 <span class="flex-grow truncate text-gray-700">Группа 1</span>
                 <span class="text-gray-700">111 111.00</span>
@@ -72,9 +90,17 @@
               </div>
             </div>
             <div class="flex w-full pr-2 mt-2">
-              <button class="focus:outline-none text-white text-sm py-2 w-5 flex-grow mr-1  bg-blue-900 hover:bg-blue-600 hover:shadow-md">Добавить</button>
-              <button class="focus:outline-none text-white text-sm py-2 w-5 flex-grow bg-red-900 hover:bg-red-600 hover:shadow-md">Удалить</button>
-          </div>
+              <button
+                class="focus:outline-none text-white text-sm py-2 w-5 flex-grow mr-1 bg-blue-900 hover:bg-blue-600 hover:shadow-md"
+              >
+                Добавить
+              </button>
+              <button
+                class="focus:outline-none text-white text-sm py-2 w-5 flex-grow bg-red-900 hover:bg-red-600 hover:shadow-md"
+              >
+                Удалить
+              </button>
+            </div>
 
             <div class="mt-5 divide-y-2 divide-gray-300 truncate pr-2 w-full">
               <div class="text-xl text-blue-900 font-semibold mb-2">Баланс</div>
@@ -92,17 +118,28 @@
               </div>
             </div>
             <div class="pr-2 mt-5">
-              <button class="focus:outline-none text-white text-sm py-2 bg-blue-900 hover:bg-blue-600 hover:shadow-md w-full">Скопировать</button>
+              <button
+                class="focus:outline-none text-white text-sm py-2 bg-blue-900 hover:bg-blue-600 hover:shadow-md w-full"
+              >
+                Скопировать
+              </button>
             </div>
           </div>
 
           <!-- operation columns -->
           <div class="flex-grow divide-y-2 divide-gray-300 truncate mx-6">
-            <div class="text-xl text-blue-900 font-semibold mb-2">Транзакции</div>
+            <div class="text-xl text-blue-900 font-semibold mb-2">
+              Транзакции
+            </div>
             <div class="flex flex-grow py-1 px-2">
-              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-2">
+              <div
+                class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-2"
+              >
                 <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
-                <svg class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none" viewBox="0 0 20 20">
+                <svg
+                  class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                 </svg>
               </div>
@@ -113,9 +150,14 @@
             </div>
 
             <div class="flex flex-grow py-1 pr-1 px-2 pl-4">
-              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-2">
+              <div
+                class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-2"
+              >
                 <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
-                <svg class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none" viewBox="0 0 20 20">
+                <svg
+                  class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                 </svg>
               </div>
@@ -126,9 +168,14 @@
             </div>
 
             <div class="flex flex-grow pr-1 py-1 px-2 pl-6 hover:bg-blue-300">
-              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
+              <div
+                class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1"
+              >
                 <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
-                <svg class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none" viewBox="0 0 20 20">
+                <svg
+                  class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none"
+                  viewBox="0 0 20 20"
+                >
                   <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
                 </svg>
               </div>
@@ -138,78 +185,97 @@
                 <p class="text-gray-500 w-20">15.12, Сб</p>
                 <p class="flex-grow text-gray-500">
                   <span>Пятерочка</span>
-                  <span class="text-sm text-gray-400 flex-shrink" >Продукты для покупки для чего то там еще, вобщем комент длинный</span>
+                  <span class="text-sm text-gray-400 flex-shrink"
+                    >Продукты для покупки для чего то там еще, вобщем комент
+                    длинный</span
+                  >
                 </p>
-                
               </div>
             </div>
           </div>
 
           <!-- Details columns -->
           <div class="w-2/5 mr-5 border-l-2 pl-5 border-gray-300">
-          <div class="divide-y-2 divide-gray-300">
-            <div class="text-xl text-blue-900 font-semibold mb-2">Счета</div>
-            <div class="flex py-1 px-2">
-              
-              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
-                <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
-                <svg class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none" viewBox="0 0 20 20">
-                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                </svg>
+            <div class="divide-y-2 divide-gray-300">
+              <div class="text-xl text-blue-900 font-semibold mb-2">Счета</div>
+              <div class="flex py-1 px-2">
+                <div
+                  class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1"
+                >
+                  <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
+                  <svg
+                    class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                  </svg>
+                </div>
+                <div class="w-1 bg-red-200 mx-1"></div>
+                <span class="flex-grow text-gray-600 truncate">ВТБ</span>
               </div>
-              <div class="w-1 bg-red-200 mx-1"></div>
-              <span class="flex-grow text-gray-600 truncate">ВТБ</span>
-            </div>
-            <div class="flex py-1 px-2">
-              
-              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
-                <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
-                <svg class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none" viewBox="0 0 20 20">
-                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                </svg>
+              <div class="flex py-1 px-2">
+                <div
+                  class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1"
+                >
+                  <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
+                  <svg
+                    class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                  </svg>
+                </div>
+                <div class="w-1 bg-green-500 mx-1"></div>
+                <span class="flex-grow text-gray-600 truncate">Сбербанк</span>
               </div>
-              <div class="w-1 bg-green-500 mx-1"></div>
-              <span class="flex-grow text-gray-600 truncate">Сбербанк</span>
-            </div>
-            <div class="flex py-1 px-2">
-              
-              <div class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1">
-                <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
-                <svg class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none" viewBox="0 0 20 20">
-                  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                </svg>
+              <div class="flex py-1 px-2">
+                <div
+                  class="bg-white border-2 rounded my-auto border-gray-400 w-4 h-4 flex flex-shrink-0 mr-1"
+                >
+                  <input type="checkbox" class="opacity-0 absolute w-4 h-4" />
+                  <svg
+                    class="fill-current hidden w-3 h-3 text-blue-900 pointer-events-none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
+                  </svg>
+                </div>
+                <div class="w-1 bg-indigo-800 mx-1"></div>
+                <span class="flex-grow text-gray-600 truncate">Кошелек</span>
               </div>
-              <div class="w-1 bg-indigo-800 mx-1 "></div>
-              <span class="flex-grow text-gray-600 truncate">Кошелек</span>
             </div>
-          </div>
-          <div class="divide-y-2 divide-gray-300">
-            <div class="text-xl mt-5 text-blue-900 font-semibold mb-2">Детали</div>
-            <div class="flex py-1 px-2">
-              <div class="text-gray-900 mr-2 font-bold">Дата: </div>
-              <span class="text-gray-600">21.04, СБ</span>
+            <div class="divide-y-2 divide-gray-300">
+              <div class="text-xl mt-5 text-blue-900 font-semibold mb-2">
+                Детали
+              </div>
+              <div class="flex py-1 px-2">
+                <div class="text-gray-900 mr-2 font-bold">Дата:</div>
+                <span class="text-gray-600">21.04, СБ</span>
+              </div>
+              <div class="flex py-1 px-2">
+                <div class="text-gray-900 mr-2 font-bold">Сумма:</div>
+                <span class="text-gray-600">1123.00</span>
+              </div>
+              <div class="py-1 px-2">
+                <span class="text-gray-900 mr-2 font-bold">Категория: </span>
+                <span class="text-gray-600">Быт / Продукты</span>
+              </div>
+              <div class="py-1 px-2">
+                <span class="text-gray-900 mr-2 font-bold">Счет: </span>
+                <span class="text-gray-500">VTB</span>
+              </div>
+              <div class="py-1 px-2">
+                <span class="text-gray-900 mr-2 font-bold">Место:</span>
+                <span class="text-gray-500 text-sm">Agrotorg</span>
+              </div>
+              <div class="py-1 px-2">
+                <span class="text-gray-900 mr-2 font-bold">Коментарий:</span>
+                <span class="text-gray-500 text-sm font-thin"
+                  >Длинный текст с пояснением что это за покупка и для чего
+                  она</span
+                >
+              </div>
             </div>
-            <div class="flex py-1 px-2">
-              <div class="text-gray-900 mr-2 font-bold">Сумма:</div>
-              <span class="text-gray-600">1123.00</span>
-            </div>
-            <div class="py-1 px-2">
-            <span class="text-gray-900 mr-2 font-bold">Категория: </span>
-            <span class="text-gray-600">Быт / Продукты</span>
-          </div>
-          <div  class="py-1 px-2">
-            <span class="text-gray-900 mr-2 font-bold">Счет: </span>
-              <span class="text-gray-500">VTB</span>
-            </div>
-            <div  class="py-1 px-2">
-            <span class="text-gray-900 mr-2 font-bold">Место:</span>
-            <span class="text-gray-500 text-sm">Agrotorg</span>
-          </div>
-          <div  class="py-1 px-2">
-            <span class="text-gray-900 mr-2 font-bold">Коментарий:</span>
-            <span class="text-gray-500 text-sm font-thin">Длинный текст с пояснением что это за покупка и для чего она</span>
-          </div>
-          </div>
           </div>
         </div>
       </div>
