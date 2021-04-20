@@ -30,7 +30,7 @@ export interface AddReportRowAction {
 
 export interface DeleteReportRowAction {
   type: typeof DELETE_REPORT_ROW;
-  payload: string;
+  payload: undefined;
 }
 
 export interface RenameReportRowAction {

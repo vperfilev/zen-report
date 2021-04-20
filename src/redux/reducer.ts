@@ -16,7 +16,8 @@ import {
 export interface State {
   transactions: Transaction[];
   accounts: Account[];
-  selectedReportRowId: string | ReportType;
+  selectedReportRow: ReportRow | undefined;
+  selectedReportType: ReportType
   incomeReport: ReportRow[];
   outcomeReport: ReportRow[];
   selectedTransactionId: string;
@@ -26,7 +27,8 @@ const initialState: State = {
   accounts: [],
   incomeReport: [],
   outcomeReport: [],
-  selectedReportRowId: ReportType.income,
+  selectedReportRow: undefined,
+  selectedReportType: ReportType.income,
   selectedTransactionId: "",
   transactions: [],
 };
@@ -57,23 +59,33 @@ export default function reducer(
       const accounts: Account[] = action.payload
         .map((t) => t.account)
         .filter((value, index, self) => self.indexOf(value) === index)
+        .sort((a,b) => a.localeCompare(b))
         .map((name, index) => ({
           name,
           isSelected: true,
           colour: colorList[index % colorList.length],
         }));
-      return { ...state, transactions: action.payload, accounts: accounts };
+
+      const sortedTransactions = action.payload.sort((a,b) => 
+        a.category === b.category ? 
+          a.subCategory.localeCompare(b.subCategory) : 
+          a.category.localeCompare(b.category));
+
+      return { ...state, transactions: sortedTransactions, accounts: accounts };
     }
 
     case SELECT_REPORT_ROW: {
       const reportRowId = action.payload;
-      if (
-        state.incomeReport.findIndex((x) => x.id === reportRowId) === -1 &&
-        state.outcomeReport.findIndex((x) => x.id === reportRowId) === -1
-      ) {
-        return state;
+      const incomeRowIndex = state.incomeReport.findIndex((x) => x.id === reportRowId)
+      if (incomeRowIndex !== -1) {
+        return { ...state, selectedReportRow: state.incomeReport[incomeRowIndex], selectedReportType: ReportType.income};
+      } else {
+        const outcomeIndex = state.outcomeReport.findIndex((x) => x.id === reportRowId);
+        if (outcomeIndex !== -1){
+          return { ...state, selectedReportRow: state.outcomeReport[outcomeIndex], selectedReportType: ReportType.outcome};
+        }
       }
-      return { ...state, selectedReportRowId: reportRowId };
+      return state;
     }
 
     case ADD_REPORT_ROW: {
@@ -91,30 +103,28 @@ export default function reducer(
     }
 
     case DELETE_REPORT_ROW: {
-      let selectedReportRowId: string | ReportType = state.selectedReportRowId;
-      const id = action.payload;
-      if (state.selectedReportRowId === id){
-        const incomeIndex = state.incomeReport.findIndex(r => r.id === id);
-        if (incomeIndex !== -1) {
+      let selectedReportRow = state.selectedReportRow
+      const deletedId = selectedReportRow?.id;
+      if (selectedReportRow !== undefined) {
+        if (state.selectedReportType === ReportType.income){
+          const incomeIndex = state.incomeReport.findIndex(r => r.id === selectedReportRow?.id);
           const newIncomeIndex = incomeIndex < (state.incomeReport.length - 1) ? incomeIndex + 1 : incomeIndex - 1;
-          selectedReportRowId = newIncomeIndex < 0 ? ReportType.income : state.incomeReport[newIncomeIndex].id;
-        }else{
-          const outcomeIndex = state.outcomeReport.findIndex(r => r.id === id);
-          if (outcomeIndex !== -1) {
-            const newOutcomeIndex = outcomeIndex < (state.outcomeReport.length - 1) ? outcomeIndex + 1 : outcomeIndex - 1;
-            selectedReportRowId = newOutcomeIndex < 0 ? ReportType.outcome : state.outcomeReport[newOutcomeIndex].id;
-          }
+          selectedReportRow = newIncomeIndex < 0 ? undefined : state.incomeReport[newIncomeIndex];
+        } else {
+          const outcomeIndex = state.outcomeReport.findIndex(r => r.id === selectedReportRow?.id);
+          const newOutcomeIndex = outcomeIndex < (state.outcomeReport.length - 1) ? outcomeIndex + 1 : outcomeIndex - 1;
+          selectedReportRow = newOutcomeIndex < 0 ? undefined : state.outcomeReport[newOutcomeIndex];
         }
+        
+        return {
+          ...state,
+          transactions: state.transactions.map(t => t.reportId === deletedId ? {...t, reportId: undefined} : t),
+          selectedReportRow,
+          incomeReport: state.incomeReport.filter((r) => r.id !== deletedId),
+          outcomeReport: state.outcomeReport.filter((r) => r.id !== deletedId),
+        };
       }
-      return {
-        ...state,
-        transactions: state.transactions.map(t => t.reportId === id ? {...t, reportId: undefined} : t),
-        selectedReportRowId,
-        incomeReport: state.incomeReport.filter((r) => r.id !== id),
-        outcomeReport: state.outcomeReport.filter(
-          (r) => r.id !== id
-        ),
-      };
+      return state;
     }
 
     case SELECT_TRANSACTION: {
@@ -152,7 +162,7 @@ export default function reducer(
         if (addedIds.findIndex((r) => r === transaction.id) === -1) {
           return transaction;
         }
-        return { ...transaction, reportId: state.selectedReportRowId };
+        return { ...transaction, reportId: state.selectedReportRow?.id };
       });
       return { ...state, transactions: transactions };
     }

@@ -60,11 +60,11 @@ export function AddReportRow(
   };
 }
 
-export function DeleteReportRow(rowId: string): ActionCreator<ActionTypes> {
+export function DeleteSelectedReportRow(): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
     const action: DeleteReportRowAction = {
       type: DELETE_REPORT_ROW,
-      payload: rowId,
+      payload: undefined,
     };
     return dispatch(action);
   };

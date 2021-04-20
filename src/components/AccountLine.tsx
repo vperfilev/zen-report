@@ -26,7 +26,7 @@ type Props = ReturnType<typeof mapDispatchToProps> &
 
 function AccountRow({ account, AccountSelectionChange }: Props) {
   return (
-    <div className="flex py-1 px-2">
+    <div className="flex py-2 px-2">
       <CheckBox labelText="" checked={account.isSelected} changed={(state: boolean) => AccountSelectionChange(account.name, state)} />
       <div className="w-1 mx-1" style={{ backgroundColor: account.colour }}></div>
       <span className="flex-grow text-gray-600 truncate">{account.name}</span>

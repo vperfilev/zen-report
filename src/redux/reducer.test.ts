@@ -1,7 +1,7 @@
 import { ActionTypes } from "./actions";
 import reducer, { State } from "./reducer";
 import { createStore, Store } from "redux";
-import { AccountSelectionChange, AddReportRow, AddTransactionsToSelectedReport, DeleteReportRow, PutTransactions, RemoveTransactionsFromSelectedReport, RenameReportName, SelectReportRow, SelectTransaction } from "./actionCreators";
+import { AccountSelectionChange, AddReportRow, AddTransactionsToSelectedReport, DeleteSelectedReportRow, PutTransactions, RemoveTransactionsFromSelectedReport, RenameReportName, SelectReportRow, SelectTransaction } from "./actionCreators";
 import { ReportType } from "../models/ReportType";
 
 const createStoreWithData = ():Store<State, ActionTypes> => {
@@ -68,7 +68,7 @@ describe("test reducer", () => {
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe("r2");
+    expect(state.selectedReportRow?.id).toBe("r2");
   });
 
   it("SelectReportRow should not select a report row if it doesn't exist", () => {
@@ -78,7 +78,7 @@ describe("test reducer", () => {
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe("r1");
+    expect(state.selectedReportRow?.id).toBe("r1");
   });
 
   it("SelectTransaction should select transaction", () => {
@@ -128,7 +128,7 @@ describe("test reducer", () => {
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.transactions[1].reportId).toBe(undefined);
+    expect(state.transactions[0].reportId).toBe(undefined);
   });
 
   it("AddTransactionsToSelectedReport should add transactions to selected report", () => {
@@ -165,7 +165,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should delete income report row", () => {
     const store = createStoreWithData();
-    const action = DeleteReportRow("r1")
+    SelectReportRow("r1")(store.dispatch);
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -175,7 +176,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should delete outcome report row", () => {
     const store = createStoreWithData();
-    const action = DeleteReportRow("r2")
+    SelectReportRow("r2")(store.dispatch);
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -187,80 +189,82 @@ describe("test reducer", () => {
     const store = createStoreWithData();
     AddReportRow({id:"r2", name: "rep row 1"}, ReportType.income)(store.dispatch);
     SelectReportRow("r1")(store.dispatch);
-    const action = DeleteReportRow("r1")
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe("r2");
+    expect(state.selectedReportRow?.id).toBe("r2");
   });
 
   it("DeleteReportRow should select prev income report row if deleted is selected and it's the last", () => {
     const store = createStoreWithData();
     AddReportRow({id:"r12", name: "rep row 1"}, ReportType.income)(store.dispatch);
     SelectReportRow("r1")(store.dispatch);
-    const action = DeleteReportRow("r1")
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe("r12");
+    expect(state.selectedReportRow?.id).toBe("r12");
   });
 
   it("DeleteReportRow should select undef if it's income single", () => {
     const store = createStoreWithData();
     SelectReportRow("r1")(store.dispatch);
-    const action = DeleteReportRow("r1")
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe(ReportType.income);
+    expect(state.selectedReportRow?.id).toBe(undefined);
+    expect(state.selectedReportType).toBe(ReportType.income);
   });
 
   it("DeleteReportRow should select next outcome report row if deleted is selected", () => {
     const store = createStoreWithData();
     AddReportRow({id:"r22", name: "rep row 1"}, ReportType.outcome)(store.dispatch);
     SelectReportRow("r2")(store.dispatch);
-    const action = DeleteReportRow("r2")
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe("r22");
+    expect(state.selectedReportRow?.id).toBe("r22");
   });
 
   it("DeleteReportRow should select prev outcome report row if deleted is selected and it's the last", () => {
     const store = createStoreWithData();
     AddReportRow({id:"r22", name: "rep row 1"}, ReportType.outcome)(store.dispatch);
     SelectReportRow("r22")(store.dispatch);
-    const action = DeleteReportRow("r22")
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe("r2");
+    expect(state.selectedReportRow?.id).toBe("r2");
   });
 
   it("DeleteReportRow should select undef if it's outcome single", () => {
     const store = createStoreWithData();
     SelectReportRow("r2")(store.dispatch);
-    const action = DeleteReportRow("r2")
+    const action = DeleteSelectedReportRow()
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.selectedReportRowId).toBe(ReportType.outcome);
+    expect(state.selectedReportType).toBe(ReportType.outcome);
   });
 
   it("DeleteReportRow should remove transactions from the report", () => {
     const store = createStoreWithData();
-    const action = DeleteReportRow("r1");
+    SelectReportRow("r1")(store.dispatch);
+    const action = DeleteSelectedReportRow();
 
     action(store.dispatch);
 
     const state = store.getState();
-    expect(state.transactions[0].reportId).toBe(undefined);
+    expect(state.transactions[1].reportId).toBe(undefined);
   });
 
   it("AddReportRow should create income report row", () => {
