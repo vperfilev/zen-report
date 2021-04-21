@@ -1,31 +1,29 @@
 import * as React from "react";
 import { Transaction } from "../models";
+import { formatAmount, formatDate } from "../utils/formatters";
 import { CheckBox } from "./elements";
 
 export interface Props {
   data: Transaction;
   selectionChange: (id: string, state: boolean) => void;
   isChecked: boolean;
-  level: number;
   accountColor: string;
+  selectionIsEnabled: boolean;
+  rowSelected: (id: string) => void;
+  isSelected: boolean;
 }
 
-export default function TransactionRow({ data, isChecked, selectionChange, accountColor, level= 2 }: Props) {
-  const rowPadding = ((level+1)*0.5) + "rem";
-  const contentPadding = ((2-level)*0.5) + "rem";
+export default function TransactionRow({ data, isChecked, selectionChange, accountColor, selectionIsEnabled, isSelected, rowSelected}: Props) {
   return (
-    <div className="flex flex-grow pr-1 py-2 px-2 hover:bg-blue-300" style={{paddingLeft: rowPadding}}>
-      <CheckBox checked={isChecked} labelText="" changed={(state: boolean) => selectionChange(data.id, state)} />
+    <div className={"flex flex-grow pr-1 py-2 px-2 hover:bg-blue-100" + (isSelected ? " bg-blue-100" : "")} onClick={()=>rowSelected(data.id)}>
+      <CheckBox enabled={selectionIsEnabled} checked={isChecked} labelText="" changed={(state: boolean) => selectionChange(data.id, state)} />
       <div className="select-none flex-grow flex">
         <div className="w-1 mr-1" style={{ backgroundColor: accountColor }}></div>
-        <span className="text-gray-500 mr-2 w-20 truncate">
-          {new Intl.NumberFormat('ru-RU', {minimumFractionDigits: 2}).format(Math.abs(data.amount))}
-        </span>
-        <p className="text-gray-500 w-20 pr-2" style={{paddingLeft: contentPadding}}>15.12, Сб</p>
+        <span className="text-gray-500 mr-2 w-20 truncate text-right">{formatAmount(data.amount)}</span>
+        <p className="text-gray-500 w-20 pr-2">{formatDate(data.time)}</p>
         <p className="flex-grow text-gray-500">
-          {data.place && <span>{data.place}</span>}
-          <span className="text-sm text-gray-400 flex-shrink ml-2">{data.comment}
-          </span>
+          {data.place && <span className="mr-2">{data.place}</span>}
+          <span className="text-sm text-gray-400 flex-shrink">{data.comment}</span>
         </p>
       </div>
     </div>

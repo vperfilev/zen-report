@@ -35,7 +35,7 @@ const fakeData: Transaction[] = [
   {
     category: "Зарплата",
     subCategory: "",
-    time: 44263,
+    time: 442630000,
     amount: 18000,
     account: "Кредитка",
     place: "Е+",
@@ -46,7 +46,7 @@ const fakeData: Transaction[] = [
   {
     category: "Зарплата",
     subCategory: "",
-    time: 44280,
+    time: 442800000,
     amount: 12000,
     account: "Кредитка",
     place: "Е+",
@@ -57,7 +57,7 @@ const fakeData: Transaction[] = [
   {
     category: "Зарплата",
     subCategory: "Переработки",
-    time: 44281,
+    time: 442810000,
     amount: 1250,
     account: "Наличные",
     place: "",
@@ -68,7 +68,7 @@ const fakeData: Transaction[] = [
   {
     category: "Зарплата",
     subCategory: "Переработки",
-    time: 44282,
+    time: 442820000,
     amount: 5570,
     account: "Наличные",
     place: "",
@@ -79,7 +79,7 @@ const fakeData: Transaction[] = [
   {
     category: "",
     subCategory: "",
-    time: 44282,
+    time: 442820000,
     amount: 5570,
     account: "Наличные",
     place: "",
@@ -90,7 +90,7 @@ const fakeData: Transaction[] = [
   {
     category: "",
     subCategory: "",
-    time: 44282,
+    time: 442820000,
     amount: 5570,
     account: "Наличные",
     place: "",
@@ -101,7 +101,7 @@ const fakeData: Transaction[] = [
   {
     category: "Без под категорий",
     subCategory: "",
-    time: 44282,
+    time: 442820000,
     amount: 5570,
     account: "Наличные",
     place: "",
@@ -112,7 +112,7 @@ const fakeData: Transaction[] = [
   {
     category: "Без под категорий",
     subCategory: "",
-    time: 44282,
+    time: 442820000,
     amount: 5570,
     account: "Наличные",
     place: "",
@@ -123,7 +123,7 @@ const fakeData: Transaction[] = [
   {
     category: "Зарплата",
     subCategory: "Премии",
-    time: 44283,
+    time: 442830000,
     amount: 28000,
     account: "VTB",
     place: "",
@@ -134,7 +134,7 @@ const fakeData: Transaction[] = [
   {
     category: "Зарплата",
     subCategory: "Премии",
-    time: 44284,
+    time: 442840000,
     amount: 1000,
     account: "VTB",
     place: "",
@@ -145,7 +145,7 @@ const fakeData: Transaction[] = [
   {
     category: "Прочее",
     subCategory: "Таксовал",
-    time: 44285,
+    time: 442850000,
     amount: 1500,
     account: "Наличные",
     place: "",
@@ -156,7 +156,7 @@ const fakeData: Transaction[] = [
   {
     category: "Прочее",
     subCategory: "Озвучки",
-    time: 44282,
+    time: 442820000,
     amount: 7000,
     account: "Наличные",
     place: "Олег Чупиков",
@@ -167,7 +167,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Всякие фигульки",
-    time: 44257,
+    time: 442570000,
     amount: -500,
     account: "Наличные",
     place: "",
@@ -178,7 +178,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Всякие фигульки",
-    time: 44264,
+    time: 442640000,
     amount: -500,
     account: "Наличные",
     place: "",
@@ -189,7 +189,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Всякие фигульки",
-    time: 44271,
+    time: 442710000,
     amount: -500,
     account: "Наличные",
     place: "",
@@ -200,7 +200,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Всякие фигульки",
-    time: 44278,
+    time: 442780000,
     amount: -500,
     account: "Наличные",
     place: "",
@@ -211,7 +211,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Всякие фигульки",
-    time: 44285,
+    time: 442850000,
     amount: -500,
     account: "Наличные",
     place: "",
@@ -222,7 +222,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Детки",
-    time: 44276,
+    time: 442760000,
     amount: -1500,
     account: "Наличные",
     place: "",
@@ -233,7 +233,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Детки",
-    time: 44276,
+    time: 442760000,
     amount: -600,
     account: "Наличные",
     place: "",
@@ -244,7 +244,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44263,
+    time: 442630000,
     amount: -150,
     account: "VTB",
     place: "",
@@ -255,7 +255,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44264,
+    time: 442640000,
     amount: -150,
     account: "VTB",
     place: "",
@@ -266,7 +266,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44265,
+    time: 442650000,
     amount: -150,
     account: "VTB",
     place: "",
@@ -277,7 +277,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44266,
+    time: 442660000,
     amount: -150,
     account: "VTB",
     place: "",
@@ -288,7 +288,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44267,
+    time: 442670000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -299,7 +299,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44270,
+    time: 442700000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -310,7 +310,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44271,
+    time: 442700001,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -321,7 +321,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44272,
+    time: 442720000,
     amount: -150,
     account: "VTB",
     place: "",
@@ -343,7 +343,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44274,
+    time: 442700004,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -354,7 +354,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44277,
+    time: 440000277,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -365,7 +365,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44278,
+    time: 442700008,
     amount: -150,
     account: "VTB",
     place: "",
@@ -376,7 +376,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44279,
+    time: 442700009,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -387,7 +387,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "",
-    time: 44280,
+    time: 442800000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -398,7 +398,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "",
-    time: 44281,
+    time: 442810000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -409,7 +409,7 @@ const fakeData: Transaction[] = [
   {
     category: "",
     subCategory: "",
-    time: 44284,
+    time: 442840000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -420,7 +420,7 @@ const fakeData: Transaction[] = [
   {
     category: "",
     subCategory: "",
-    time: 44285,
+    time: 442850000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -431,7 +431,7 @@ const fakeData: Transaction[] = [
   {
     category: "Второстепенно",
     subCategory: "Кафе и рестораны",
-    time: 44286,
+    time: 442860000,
     amount: -150,
     account: "Наличные",
     place: "",
@@ -442,7 +442,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Машина",
-    time: 44279,
+    time: 442790000,
     amount: -1520,
     account: "Кредитка",
     place: "",
@@ -453,7 +453,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Платежи, комиссии",
-    time: 44266,
+    time: 442660000,
     amount: -2100,
     account: "Кредитка",
     place: "",
@@ -464,7 +464,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Платежи, комиссии",
-    time: 44283,
+    time: 442830000,
     amount: -450,
     account: "Кредитка",
     place: "анНет",
@@ -475,7 +475,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Продукты",
-    time: 44274,
+    time: 442740000,
     amount: -1445,
     account: "Кредитка",
     place: "Остров",
@@ -486,7 +486,7 @@ const fakeData: Transaction[] = [
   {
     category: "Первостепенно",
     subCategory: "Продукты",
-    time: 44282,
+    time: 442820000,
     amount: -3460,
     account: "Наличные",
     place: "Остров",

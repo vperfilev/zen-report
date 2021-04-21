@@ -1,4 +1,4 @@
 export * from "./PrimaryButton";
 export * from "./SecondaryButton";
 export * from "./ComponentTitle";
-export * from "./CheckBox";
+export {default as CheckBox}  from "./CheckBox";

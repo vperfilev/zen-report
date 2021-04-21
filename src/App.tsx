@@ -1,6 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { Logo, AccountsPanel, FilePanel } from "./components";
+import DetailsPanel from "./components/DetailsPanel";
 import TransactionList from "./components/TransactionList";
 import store from "./redux/store";
 
@@ -18,6 +19,8 @@ function App() {
         </div>
         <div className="w-1/4 mr-5 border-l-2 pl-5 border-gray-300 flex-shrink-0">
           <AccountsPanel/>
+          <div className="h-5"/>
+          <DetailsPanel/>
         </div>
       </div>
     </Provider>
