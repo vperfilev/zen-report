@@ -23,7 +23,7 @@ export default function TransactionHeaderRow({
 }: Props) {
   return (
     <div className="flex flex-grow py-2 px-2" style={{backgroundColor: level === 0 ? "rgb(147, 197, 253)" : "rgb(191, 219, 254)"}}>
-      <CheckBox enabled={selectionIsEnabled} labelText="" checked={checked} changed={(state:boolean) => onChange(transactionIds, state)}/>
+      <CheckBox enabled={selectionIsEnabled} checked={checked} changed={(state:boolean) => onChange(transactionIds, state)}/>
       <div className="w-1 mr-1 bg-transparent"></div>
       <div className="flex-grow flex">
         <span className="text-gray-800 mr-2 w-20 truncate text-right">
