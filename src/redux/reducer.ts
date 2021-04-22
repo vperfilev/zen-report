@@ -21,6 +21,7 @@ export interface State {
   incomeReport: ReportRow[];
   outcomeReport: ReportRow[];
   selectedTransactionId: string;
+  savings: number;
 }
 
 const initialState: State = {
@@ -31,6 +32,7 @@ const initialState: State = {
   selectedReportType: ReportType.income,
   selectedTransactionId: "",
   transactions: [],
+  savings: 0
 };
 
 export default function reducer(

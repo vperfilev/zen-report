@@ -12,6 +12,7 @@ import {
 import { ReportType } from "../models/ReportType";
 import TransactionRow from "./TransactionRow";
 import TransactionHeaderRow from "./TransactionHeaderRow";
+import { getSelectedAccountsTransactions } from "../utils/datalogic";
 
 const mapStateToProps = (state: State) => ({
   transactions: state.transactions,
@@ -43,16 +44,9 @@ function TransactionList({
   RemoveTransactionsFromSelectedReport,
   AddTransactionsToSelectedReport,
 }: Props) {
-  const selectedAccounts = accounts.filter((a) => a.isSelected);
-  const filteredTransactions = transactions
-    .filter((t) =>
-      selectedReportType === ReportType.income ? t.amount > 0 : t.amount < 0
-    )
-    .filter(
-      (t) => selectedAccounts.findIndex((a) => a.name === t.account) !== -1
-    );
+  const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType);
   const accountColours: { [id: string]: string } = {};
-  selectedAccounts.forEach((a) => (accountColours[a.name] = a.colour));
+  accounts.filter((a) => a.isSelected).forEach((a) => (accountColours[a.name] = a.colour));
   const selectionIsEnabled = selectedReport !== undefined;
 
   const handleTransactionsChanges = (ids: string[], state: boolean) => {
