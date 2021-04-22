@@ -20,8 +20,7 @@ type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchT
 const ReportTotal: FC<Props> = ({incomeAmount, outcomeAmount, savings}) =>{
     return (
         <List header="Баланс">
-            <AmountRow title="Доход" value={Math.abs(incomeAmount)}/>
-            <AmountRow title="Отложено" value={savings}/>
+            <AmountRow title="Доход" value={Math.abs(incomeAmount - savings)}/>
             <AmountRow title="Расход" value={Math.abs(outcomeAmount)}/>
             <AmountRow title="Баланс" value={incomeAmount - savings - outcomeAmount}/>
         </List>
