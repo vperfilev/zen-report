@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import List from "./elements/List";
+import {List} from "./elements";
 
 interface Prop {
 

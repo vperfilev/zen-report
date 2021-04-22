@@ -3,7 +3,7 @@ import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
-import List from "./elements/List";
+import {List} from "./elements";
 import AccountLine from "./AccountLine";
 
 const mapStateToProps = (state: State) => ({ accounts: state.accounts });
