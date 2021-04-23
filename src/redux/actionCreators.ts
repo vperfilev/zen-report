@@ -21,6 +21,8 @@ import {
   SelectTransactionAction,
   SELECT_REPORT_ROW,
   SELECT_TRANSACTION,
+  SetSavingsAmountAction,
+  SET_SAVING_AMOUNT,
 } from "./actions";
 
 export function PutTransactions(
@@ -127,6 +129,18 @@ export function SelectTransaction(
     const action: SelectTransactionAction = {
       type: SELECT_TRANSACTION,
       payload: transactionId,
+    };
+    return dispatch(action);
+  };
+}
+
+export function SetSavingsAmount(
+  amount: number
+): ActionCreator<ActionTypes> {
+  return (dispatch: Dispatch<ActionTypes>) => {
+    const action: SetSavingsAmountAction = {
+      type: SET_SAVING_AMOUNT,
+      payload: amount,
     };
     return dispatch(action);
   };

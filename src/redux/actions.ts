@@ -12,6 +12,7 @@ export const REMOVE_TRANSACTIONS_FROM_SELECTED_REPORT =
   "REMOVE_TRANSACTIONS_FROM_SELECTED_REPORT";
 export const ACCOUNT_SELECTION_CHANGE = "ACCOUNT_SELECTION_CHANGE";
 export const SELECT_TRANSACTION = "SELECT_TRANSACTION";
+export const SET_SAVING_AMOUNT = "SET_SAVING_AMOUNT";
 
 export interface PutTransactionsAction {
   type: typeof PUT_TRANSACTIONS;
@@ -64,6 +65,11 @@ export interface SelectTransactionAction {
   payload: string;
 }
 
+export interface SetSavingsAmountAction {
+  type: typeof SET_SAVING_AMOUNT;
+  payload: number;
+}
+
 export type ActionTypes =
   | SelectTransactionAction
   | AccountSelectionChangeAction
@@ -73,4 +79,5 @@ export type ActionTypes =
   | DeleteReportRowAction
   | AddReportRowAction
   | SelectReportRowAction
-  | PutTransactionsAction;
+  | PutTransactionsAction
+  | SetSavingsAmountAction;

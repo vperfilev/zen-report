@@ -11,6 +11,7 @@ import {
   RENAME_REPORT_ROW,
   SELECT_REPORT_ROW,
   SELECT_TRANSACTION,
+  SET_SAVING_AMOUNT,
 } from "./actions";
 
 export interface State {
@@ -180,6 +181,10 @@ export default function reducer(
           r.id !== reportId ? r : { ...r, name: action.payload.name }
         ),
       };
+    }
+
+    case SET_SAVING_AMOUNT: {
+      return {...state, savings: action.payload}
     }
 
     default:
