@@ -15,9 +15,9 @@ export interface Props {
 
 export default function TransactionRow({ data, isChecked, selectionChange, accountColor, selectionIsEnabled, isSelected, rowSelected}: Props) {
   return (
-    <div className={"flex flex-grow pr-1 py-2 px-2 hover:bg-blue-100" + (isSelected ? " bg-blue-100" : "")} onClick={()=>rowSelected(data.id)}>
+    <div className={"flex flex-grow pr-1 py-2 px-2 hover:bg-blue-100" + (isSelected ? " bg-blue-100" : "")}>
       <CheckBox enabled={selectionIsEnabled} checked={isChecked} changed={(state: boolean) => selectionChange(data.id, state)} />
-      <div className="select-none flex-grow flex">
+      <div className="select-none flex-grow flex" onClick={()=>rowSelected(data.id)}>
         <div className="w-1 mr-1" style={{ backgroundColor: accountColor }}></div>
         <span className="text-gray-500 mr-2 w-20 truncate text-right">{formatAmount(data.amount)}</span>
         <p className="text-gray-500 w-20 pr-2">{formatDate(data.time)}</p>

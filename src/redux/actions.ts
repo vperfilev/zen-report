@@ -21,7 +21,7 @@ export interface PutTransactionsAction {
 
 export interface SelectReportRowAction {
   type: typeof SELECT_REPORT_ROW;
-  payload: string;
+  payload: string | undefined;
 }
 
 export interface AddReportRowAction {

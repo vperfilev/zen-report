@@ -38,7 +38,7 @@ export function PutTransactions(
 }
 
 export function SelectReportRow(
-  reportRowId: string
+  reportRowId: string | undefined
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
     const action: SelectReportRowAction = {

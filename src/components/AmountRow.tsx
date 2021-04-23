@@ -8,6 +8,8 @@ export interface Props {
   amount: number;
   editType?: "none" | "hideIcon" | "title" | "amount";
   onChanged?: (value: string|number) => void;
+  onClick?: () => void;
+  isSelected?: boolean;
 }
 
 const getIcon = (editType: string | undefined, isEditMode: boolean, handleButtonClick: ()=>void): JSX.Element | null => {
@@ -22,13 +24,25 @@ const getIcon = (editType: string | undefined, isEditMode: boolean, handleButton
 }
 
 
-const AmountRow: FC<Props> = ({ title, amount, editType, onChanged}) => {
+const AmountRow: FC<Props> = ({ title, amount, editType, onChanged, onClick, isSelected}) => {
     const [isEditMode, setEditMode] = useState(false);
     const [titleValue, setTitleValue] = useState(title);
     useEffect(() => { setTitleValue(title)}, [title] )
 
     const [amountValue, setAmountValue] = useState((amount ?? 0).toFixed(2));
     useEffect(() => { setAmountValue(amount.toString()) }, [amount] )
+
+    const [inputRef, setInputRef] = useState<HTMLInputElement|null>(null)
+
+    useEffect(() => {
+      inputRef?.focus();
+    }, [inputRef]);
+
+    const handleInputKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key.toLowerCase() === "enter"){
+        handleButtonClick();
+      }
+    }
 
     const handleButtonClick = ()=>{
         if(isEditMode){
@@ -58,14 +72,31 @@ const AmountRow: FC<Props> = ({ title, amount, editType, onChanged}) => {
     
 
   return (
-    <div className="flex py-2 px-2">
-        {isEditMode && editType === "title" ?
-        <input className="border-2 border-gray-500 w-32" value={amountValue} type="number" onChange={handleTitleChange}></input> :
-      <span className="flex-grow truncate text-gray-700">{titleValue}:&nbsp;</span>
-  }
-      {isEditMode && editType === "amount" ?
-        <input className="border-2 border-gray-300 w-32 appearance-none h-6"  value={amountValue} type="text" onChange={handleAmountChange}></input> :
-          <span className="text-gray-700">{formatAmount(amount)}</span>}
+    <div className={"flex py-2 px-2" + (isSelected !== undefined ? " hover:bg-blue-100" : "") + (isSelected ? " bg-blue-100" : "")} onClick={() => {if (onClick !== undefined) onClick();}}>
+      {isEditMode && editType === "title" ? (
+        <input
+          className="flex-grow w-8 pl-0 mr-2 appearance-none h-6 focus:outline-none ring border-gray-300 "
+          value={titleValue}
+          type="text"
+          onKeyPress={handleInputKeyPress}
+          onChange={handleTitleChange}
+          ref={(input) => { setInputRef(input); }}
+        ></input>
+      ) : (
+        <span className="flex-grow truncate text-gray-700">{title}&nbsp;</span>
+      )}
+      {isEditMode && editType === "amount" ? (
+        <input
+          className="flex-grow w-8 appearance-none h-6 ml-1 focus:outline-none ring border-gray-300 px-2"
+          value={amountValue}
+          onKeyPress={handleInputKeyPress}
+          type="text"
+          ref={(input) => { setInputRef(input); }}
+          onChange={handleAmountChange}
+        ></input>
+      ) : (
+        <span className="text-gray-700">{formatAmount(amount)}</span>
+      )}
       {getIcon(editType, isEditMode, handleButtonClick)}
     </div>
   );

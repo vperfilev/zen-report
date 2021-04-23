@@ -44,7 +44,7 @@ function TransactionList({
   RemoveTransactionsFromSelectedReport,
   AddTransactionsToSelectedReport,
 }: Props) {
-  const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType);
+  const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType).filter(t=>t.reportId === selectedReport?.id || t.reportId === undefined);
   const accountColours: { [id: string]: string } = {};
   accounts.filter((a) => a.isSelected).forEach((a) => (accountColours[a.name] = a.colour));
   const selectionIsEnabled = selectedReport !== undefined;
@@ -123,7 +123,7 @@ function TransactionList({
 
     elements.push(
       <TransactionRow
-        isChecked={false}
+        isChecked={transaction.reportId !== undefined}
         selectionIsEnabled={selectionIsEnabled}
         data={transaction}
         accountColor={accountColours[transaction.account]}
