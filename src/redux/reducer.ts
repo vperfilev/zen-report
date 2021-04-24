@@ -79,10 +79,13 @@ export default function reducer(
 
     case SELECT_REPORT_ROW: {
       const reportRowId = action.payload;
-      if (reportRowId === undefined) {
-        return {...state, selectedReportRow: undefined}
+      if (reportRowId === ReportType.income) {
+        return {...state, selectedReportRow: undefined, selectedReportType: ReportType.income}
       }
-      
+      if (reportRowId === ReportType.outcome) {
+        return {...state, selectedReportRow: undefined, selectedReportType: ReportType.outcome}
+      }
+
       const incomeRowIndex = state.incomeReport.findIndex((x) => x.id === reportRowId)
       if (incomeRowIndex !== -1) {
         return { ...state, selectedReportRow: state.incomeReport[incomeRowIndex], selectedReportType: ReportType.income};

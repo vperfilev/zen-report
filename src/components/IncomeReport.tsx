@@ -74,7 +74,7 @@ const IncomeReport: FC<Props> = ({
           title="Прочее"
           amount={reportAmounts["unreported"]}
           editType="hideIcon"
-          onClick={() => SelectReportRow(undefined)}
+          onClick={() => SelectReportRow(ReportType.income)}
           isSelected={isRestSelected}
         />
         <AmountRow
@@ -93,7 +93,7 @@ const IncomeReport: FC<Props> = ({
         <SecondaryButton
           text="Удалить"
           onClick={DeleteSelectedReportRow}
-          disabled={isRestSelected}
+          disabled={isRestSelected || selectedReportType !== ReportType.income}
         />
       </div>
     </>

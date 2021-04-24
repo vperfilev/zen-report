@@ -70,13 +70,13 @@ const OutcomeReport: FC<Props> = ({
           title="Прочее"
           amount={Math.abs(reportAmounts["unreported"])}
           editType="hideIcon"
-          onClick={() => SelectReportRow(undefined)}
+          onClick={() => SelectReportRow(ReportType.outcome)}
           isSelected={isRestSelected}
         />
       </List>
       <div className="flex mt-2">
         <PrimaryButton text="Добавить" onClick={addReport} />
-        <SecondaryButton text="Удалить" onClick={DeleteSelectedReportRow} disabled={isRestSelected}/>
+        <SecondaryButton text="Удалить" onClick={DeleteSelectedReportRow} disabled={isRestSelected || selectedReportType !== ReportType.outcome}/>
       </div>
     </>
   );

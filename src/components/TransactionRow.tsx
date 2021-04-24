@@ -19,7 +19,7 @@ export default function TransactionRow({ data, isChecked, selectionChange, accou
       <CheckBox enabled={selectionIsEnabled} checked={isChecked} changed={(state: boolean) => selectionChange(data.id, state)} />
       <div className="select-none flex-grow flex" onClick={()=>rowSelected(data.id)}>
         <div className="w-1 mr-1" style={{ backgroundColor: accountColor }}></div>
-        <span className="text-gray-500 mr-2 w-20 truncate text-right">{formatAmount(data.amount)}</span>
+        <span className="text-gray-500 mr-2 w-20 truncate text-right">{formatAmount(Math.abs(data.amount))}</span>
         <p className="text-gray-500 w-20 pr-2">{formatDate(data.time)}</p>
         <p className="flex-grow text-gray-500">
           {data.place && <span className="mr-2">{data.place}</span>}
