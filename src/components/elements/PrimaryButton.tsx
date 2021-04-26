@@ -2,7 +2,7 @@ import * as React from "react";
 
 export interface IPrimaryButtonProps {
     text: string,
-    onClick: () => void,
+    onClick: (e: any) => void,
     disabled?: boolean
 }
 

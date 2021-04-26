@@ -2,10 +2,12 @@ import * as React from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { CSVReader } from 'react-papaparse';
 
 import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
-import { Transaction } from "./../models";
+import { ReportType, Transaction } from "./../models";
+import { genId } from "../utils/datalogic";
 
 const mapStateToProps = (state: State) => ({});
 
@@ -16,482 +18,90 @@ type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
 function FilePanel({ PutTransactions }: Props) {
+  const csvEl = React.useRef(null);
+  
+  const handleOnFileLoad = (data: any) => {
+    const baseId = genId();
+    const transactions = data
+      .filter((x: any, index: number) => index > 3)
+      .map((x: any, index: number) => parseTransaction(x.data, baseId + "-" + index))
+      .filter((x:Transaction)=> x !== null);
+      PutTransactions(transactions);
+  };
+
+  const parseTransaction = (data: any, id: string): Transaction | null => {
+      if (data[4] && data[7]) {
+          return null
+      }
+
+      const transactionType = data[8] == null ? ReportType.outcome : ReportType.outcome;
+      const time = (new Date(data[0])).getTime();
+      
+      const categoryNames: string[] = data[1] && data[1].split('/').map((x: string) => x.trim());
+      const categoryName = categoryNames !== undefined ? categoryNames[0] : "";
+      const subCategoryName = categoryNames !== undefined ? categoryNames[1] : "";
+      
+      const income = (new Number((data[5] ?? '0').replace(',', '.'))).valueOf();
+      const outcome = (new Number((data[8] ?? '0').replace(',', '.'))).valueOf();
+
+      const payee = data[2];
+      const comment = data[3];
+      return {
+        account: data[4] + data[7],
+        amount: outcome - income,
+        category: categoryName ?? "",
+        subCategory: subCategoryName ?? "", 
+        comment: comment,
+        place: payee, 
+        time: time, 
+        reportId: undefined,
+        id: id,
+
+      } as Transaction;
+  };
+  
+  const handleOnError = (err: any, file: any, inputElem: any, reason: any) => {
+    console.log(err);
+  };
+
+  const handleOnRemoveFile = (data: any) => {
+    PutTransactions([]);
+  };
+
+  const handleRemoveFile = (ref: any, e: any) => {
+    if (ref.current) {
+      ref.current.removeFile(e);
+    }
+  };
+
+  const handleOpenDialog = (ref: any, e: any) => {
+    if (ref.current) {
+      ref.current.open(e);
+    }
+  };
+
   return (
+    <CSVReader
+    ref={csvEl}
+    onFileLoad={handleOnFileLoad}
+    onError={handleOnError}
+    noClick
+    noDrag
+    onRemoveFile={handleOnRemoveFile}
+  >
+    {({ file }: any) => (
     <div className="flex-grow flex self-end mb-3 ml-6">
       <div className="flex-grow border-2 border-gray-300 mr-1 ml-32 align-middle p-2">
-        fileName.csv
+      {file && file.name}
       </div>
       <div className="w-64 flex">
-        <PrimaryButton text="Загрузить" onClick={() => PutTransactions(fakeData)} />
-        <SecondaryButton text="Очистить" onClick={() => PutTransactions([])} />
+        <PrimaryButton text="Загрузить" onClick={(e)=>handleOpenDialog(csvEl, e)} />
+        <SecondaryButton text="Очистить" onClick={(e)=>handleRemoveFile(csvEl, e)} />
       </div>
     </div>
+    )}
+    </CSVReader>
   );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FilePanel);
-
-const fakeData: Transaction[] = [
-  {
-    category: "Зарплата",
-    subCategory: "",
-    time: 442630000,
-    amount: 18000,
-    account: "Кредитка",
-    place: "Е+",
-    comment: "Зарплата",
-    id: "1",
-    reportId: undefined,
-  },
-  {
-    category: "Зарплата",
-    subCategory: "",
-    time: 442800000,
-    amount: 12000,
-    account: "Кредитка",
-    place: "Е+",
-    comment: "Зарплата (аванс)",
-    id: "2",
-    reportId: undefined,
-  },
-  {
-    category: "Зарплата",
-    subCategory: "Переработки",
-    time: 442810000,
-    amount: 1250,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "3",
-    reportId: undefined,
-  },
-  {
-    category: "Зарплата",
-    subCategory: "Переработки",
-    time: 442820000,
-    amount: 5570,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "4",
-    reportId: undefined,
-  },
-  {
-    category: "",
-    subCategory: "",
-    time: 442820000,
-    amount: 5570,
-    account: "Наличные",
-    place: "",
-    comment: "Без категорий",
-    id: "115",
-    reportId: undefined,
-  },
-  {
-    category: "",
-    subCategory: "",
-    time: 442820000,
-    amount: 5570,
-    account: "Наличные",
-    place: "",
-    comment: "Без категорий",
-    id: "114",
-    reportId: undefined,
-  },
-  {
-    category: "Без под категорий",
-    subCategory: "",
-    time: 442820000,
-    amount: 5570,
-    account: "Наличные",
-    place: "",
-    comment: "Без под категорий",
-    id: "125",
-    reportId: undefined,
-  },
-  {
-    category: "Без под категорий",
-    subCategory: "",
-    time: 442820000,
-    amount: 5570,
-    account: "Наличные",
-    place: "",
-    comment: "Без под категорий",
-    id: "124",
-    reportId: undefined,
-  },
-  {
-    category: "Зарплата",
-    subCategory: "Премии",
-    time: 442830000,
-    amount: 28000,
-    account: "VTB",
-    place: "",
-    comment: "",
-    id: "5",
-    reportId: undefined,
-  },
-  {
-    category: "Зарплата",
-    subCategory: "Премии",
-    time: 442840000,
-    amount: 1000,
-    account: "VTB",
-    place: "",
-    comment: "",
-    id: "6",
-    reportId: undefined,
-  },
-  {
-    category: "Прочее",
-    subCategory: "Таксовал",
-    time: 442850000,
-    amount: 1500,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "7",
-    reportId: undefined,
-  },
-  {
-    category: "Прочее",
-    subCategory: "Озвучки",
-    time: 442820000,
-    amount: 7000,
-    account: "Наличные",
-    place: "Олег Чупиков",
-    comment: "Первый том Атланта",
-    id: "8",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Всякие фигульки",
-    time: 442570000,
-    amount: -500,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "9",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Всякие фигульки",
-    time: 442640000,
-    amount: -500,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "10",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Всякие фигульки",
-    time: 442710000,
-    amount: -500,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "11",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Всякие фигульки",
-    time: 442780000,
-    amount: -500,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "12",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Всякие фигульки",
-    time: 442850000,
-    amount: -500,
-    account: "Наличные",
-    place: "",
-    comment: "",
-    id: "13",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Детки",
-    time: 442760000,
-    amount: -1500,
-    account: "Наличные",
-    place: "",
-    comment: "Подарок саше",
-    id: "14",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Детки",
-    time: 442760000,
-    amount: -600,
-    account: "Наличные",
-    place: "",
-    comment: "Школа",
-    id: "15",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442630000,
-    amount: -150,
-    account: "VTB",
-    place: "",
-    comment: "Ланч",
-    id: "16",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442640000,
-    amount: -150,
-    account: "VTB",
-    place: "",
-    comment: "Ланч",
-    id: "17",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442650000,
-    amount: -150,
-    account: "VTB",
-    place: "",
-    comment: "Ланч",
-    id: "18",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442660000,
-    amount: -150,
-    account: "VTB",
-    place: "",
-    comment: "Ланч",
-    id: "19",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442670000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "20",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442700000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "21",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442700001,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "22",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442720000,
-    amount: -150,
-    account: "VTB",
-    place: "",
-    comment: "Ланч",
-    id: "23",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 44273,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "24",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442700004,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "25",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 440000277,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "26",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442700008,
-    amount: -150,
-    account: "VTB",
-    place: "",
-    comment: "Ланч",
-    id: "27",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442700009,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "28",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "",
-    time: 442800000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "29",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "",
-    time: 442810000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "30",
-    reportId: undefined,
-  },
-  {
-    category: "",
-    subCategory: "",
-    time: 442840000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "31",
-    reportId: undefined,
-  },
-  {
-    category: "",
-    subCategory: "",
-    time: 442850000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "32",
-    reportId: undefined,
-  },
-  {
-    category: "Второстепенно",
-    subCategory: "Кафе и рестораны",
-    time: 442860000,
-    amount: -150,
-    account: "Наличные",
-    place: "",
-    comment: "Ланч",
-    id: "33",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Машина",
-    time: 442790000,
-    amount: -1520,
-    account: "Кредитка",
-    place: "",
-    comment: "бензин",
-    id: "34",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Платежи, комиссии",
-    time: 442660000,
-    amount: -2100,
-    account: "Кредитка",
-    place: "",
-    comment: "ТСЖ (свет+жкх)",
-    id: "35",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Платежи, комиссии",
-    time: 442830000,
-    amount: -450,
-    account: "Кредитка",
-    place: "анНет",
-    comment: "Инет",
-    id: "36",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Продукты",
-    time: 442740000,
-    amount: -1445,
-    account: "Кредитка",
-    place: "Остров",
-    comment: "Продукты",
-    id: "37",
-    reportId: undefined,
-  },
-  {
-    category: "Первостепенно",
-    subCategory: "Продукты",
-    time: 442820000,
-    amount: -3460,
-    account: "Наличные",
-    place: "Остров",
-    comment: "Продукты",
-    id: "38",
-    reportId: undefined,
-  },
-];
