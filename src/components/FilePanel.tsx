@@ -34,26 +34,25 @@ function FilePanel({ PutTransactions }: Props) {
           return null
       }
 
-      const transactionType = data[8] == null ? ReportType.outcome : ReportType.outcome;
-      const time = (new Date(data[0])).getTime();
+      const transactionType = data[8] ? ReportType.outcome : ReportType.income;
       
       const categoryNames: string[] = data[1] && data[1].split('/').map((x: string) => x.trim());
       const categoryName = categoryNames !== undefined ? categoryNames[0] : "";
       const subCategoryName = categoryNames !== undefined ? categoryNames[1] : "";
       
-      const income = (new Number((data[5] ?? '0').replace(',', '.'))).valueOf();
-      const outcome = (new Number((data[8] ?? '0').replace(',', '.'))).valueOf();
+      let amountString = transactionType === ReportType.outcome ? data[8] : data[5];
+      amountString = amountString ? amountString : '0';
+      amountString = amountString.replace(',', '.');
+      const amount = Number.parseFloat(amountString);
 
-      const payee = data[2];
-      const comment = data[3];
       return {
-        account: data[4] + data[7],
-        amount: outcome - income,
+        account: transactionType === ReportType.outcome ? data[4] : data[7],
+        amount: amount,
         category: categoryName ?? "",
         subCategory: subCategoryName ?? "", 
-        comment: comment,
-        place: payee, 
-        time: time, 
+        comment: data[3],
+        place: data[2], 
+        time: (new Date(data[0])).getTime(), 
         reportId: undefined,
         id: id,
 
@@ -81,6 +80,7 @@ function FilePanel({ PutTransactions }: Props) {
   };
 
   return (
+    <div className="flex-grow mb-3 ml-6 h-12 grid justify-items-stretch">
     <CSVReader
     ref={csvEl}
     onFileLoad={handleOnFileLoad}
@@ -90,9 +90,9 @@ function FilePanel({ PutTransactions }: Props) {
     onRemoveFile={handleOnRemoveFile}
   >
     {({ file }: any) => (
-    <div className="flex-grow flex self-end mb-3 ml-6">
-      <div className="flex-grow border-2 border-gray-300 mr-1 ml-32 align-middle p-2">
-      {file && file.name}
+    <div className="flex ml-auto">
+      <div className="w-96 border-2 border-gray-300 mr-1 ml-32 align-middle p-2 justify-self-end">
+      <p className="overflow-ellipsis overflow-hidden">{file && file.name}</p>
       </div>
       <div className="w-64 flex">
         <PrimaryButton text="Загрузить" onClick={(e)=>handleOpenDialog(csvEl, e)} />
@@ -101,6 +101,7 @@ function FilePanel({ PutTransactions }: Props) {
     </div>
     )}
     </CSVReader>
+    </div>
   );
 }
 
