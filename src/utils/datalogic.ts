@@ -14,7 +14,7 @@ export function genId() {
   return new Date().getTime().toString();
 }
 
-export function sumTransactionsByReports(transactions: Transaction[]) {
+export function sumTransactionsByReports(transactions: Transaction[]){
   let unreported = 0;
   const reportAmounts = transactions.reduce<{ [key: string]: number }>(
     (groups, t) => {

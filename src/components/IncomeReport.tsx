@@ -14,7 +14,7 @@ import { List, PrimaryButton, SecondaryButton } from "./elements";
 import { AmountRow } from "./";
 import {
   genId,
-  getSelectedAccountsTransactions as getAccTransactions,
+  getSelectedAccountsTransactions,
   sumTransactionsByReports,
 } from "../utils/datalogic";
 import { ReportType } from "../models";
@@ -22,7 +22,7 @@ import { ReportType } from "../models";
 const mapStateToProps = (s: State) => ({
   savings: s.savings,
   reportRows: s.incomeReport,
-  transactions: getAccTransactions(s.transactions, s.accounts, ReportType.income),
+  transactions: getSelectedAccountsTransactions(s.transactions, s.accounts, ReportType.income),
   selectedReportRow: s.selectedReportRow,
   selectedReportType: s.selectedReportType,
 });
