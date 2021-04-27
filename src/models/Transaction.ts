@@ -7,5 +7,5 @@ export interface Transaction {
     place: string,
     comment: string,
     id: string,
-    reportId: string|undefined,
+    reportId: string | undefined,
 }
