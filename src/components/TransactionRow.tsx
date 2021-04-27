@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Transaction } from "../models";
 import { formatAmount, formatDate } from "../utils/formatters";
-import { CheckBox } from "./elements";
+import { AccountIcon, CheckBox } from "./elements";
 
 export interface Props {
   data: Transaction;
@@ -18,7 +18,7 @@ export default function TransactionRow({ data, isChecked, selectionChange, accou
     <div className={"flex flex-grow pr-1 py-2 px-2 hover:bg-blue-100" + (isSelected ? " bg-blue-100" : "")}>
       <CheckBox enabled={selectionIsEnabled} checked={isChecked} changed={(state: boolean) => selectionChange(data.id, state)} />
       <div className="select-none flex-grow flex" onClick={()=>rowSelected(data.id)}>
-        <div className="w-1 mr-1" style={{ backgroundColor: accountColor }}></div>
+        <AccountIcon colour={accountColor }/>
         <span className="text-gray-500 mr-2 w-20 truncate text-right">{formatAmount(Math.abs(data.amount))}</span>
         <p className="text-gray-500 w-20 pr-2">{formatDate(data.time)}</p>
         <p className="flex-grow text-gray-500">

@@ -3,3 +3,4 @@ export * from "./ComponentTitle";
 export * from "./List";
 export * from "./PrimaryButton";
 export * from "./SecondaryButton";
+export * from "./AccountIcon";

@@ -4,13 +4,13 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
 import { AccountSelectionChange } from "./../redux/actionCreators";
 import { Account } from "./../models";
-import { CheckBox } from "./elements";
+import { AccountIcon, CheckBox } from "./elements";
 
 interface OwnProps {
-    account: Account;
+  account: Account;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ AccountSelectionChange }, dispatch );
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ AccountSelectionChange }, dispatch);
 const mapStateToProps = () => ({});
 
 const mergeProps = (
@@ -27,11 +27,18 @@ type Props = ReturnType<typeof mapDispatchToProps> &
 function AccountRow({ account, AccountSelectionChange }: Props) {
   return (
     <div className="flex py-2 px-2">
-      <CheckBox checked={account.isSelected} changed={(state: boolean) => AccountSelectionChange(account.name, state)} />
-      <div className="w-1 mx-1" style={{ backgroundColor: account.colour }}></div>
+      <CheckBox
+        checked={account.isSelected}
+        changed={(state: boolean) => AccountSelectionChange(account.name, state)}
+      />
+      <AccountIcon colour={account.colour}/>
       <span className="flex-grow text-gray-600 truncate">{account.name}</span>
     </div>
   );
 }
 
-export default connect(  mapStateToProps, mapDispatchToProps, mergeProps)(AccountRow);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+  mergeProps
+)(AccountRow);
