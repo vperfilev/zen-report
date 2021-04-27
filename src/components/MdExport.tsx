@@ -3,7 +3,6 @@ import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
-import {} from "./../redux/actionCreators";
 import { PrimaryButton } from "./elements";
 import { getSelectedAccountsTransactions, sumTransactionsByReports } from "../utils/dataLogic";
 import { ReportRow, ReportType, Transaction } from "../models";

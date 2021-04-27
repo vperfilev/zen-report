@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 
 import { formatAmount } from "../utils/formatters";
-import { IconButton } from "./elements/IconButton";
+import { IconButton } from "./elements";
 
 interface Props {
   title: string;

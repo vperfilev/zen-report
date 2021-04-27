@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface Props {
+interface Props {
     title: string;
     value: string;
     mutedValue: boolean;

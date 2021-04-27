@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { formatAmount } from "../utils/formatters";
 import { CheckBox } from "./elements";
 

@@ -3,10 +3,10 @@ import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
-import {List} from "./elements";
+import { List } from "./elements";
 import { ReportType } from "../models";
 import { getSelectedAccountsTransactionsAmount } from "../utils/dataLogic";
-import AmountRow from "./AmountRow";
+import { AmountRow } from "./";
 
 const mapStateToProps = (state: State) => ({ 
     incomeAmount: getSelectedAccountsTransactionsAmount(state.transactions, state.accounts, ReportType.income),

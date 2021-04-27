@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
 import { List } from "./elements";
-import AccountLine from "./AccountLine";
+import { AccountLine } from "./";
 
 const mapStateToProps = (state: State) => ({ accounts: state.accounts });
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({}, dispatch);

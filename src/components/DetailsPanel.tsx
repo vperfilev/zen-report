@@ -5,7 +5,7 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
 import { List } from "./elements";
 import { formatAmount, formatDate } from "../utils/formatters";
-import DetailsRow from "./DetailsRow";
+import { DetailsRow } from "./";
 
 const mapStateToProps = (state: State) => ({ 
     transaction: state.transactions.find(t => t.id === state.selectedTransactionId)

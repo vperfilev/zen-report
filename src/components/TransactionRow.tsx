@@ -3,7 +3,7 @@ import { Transaction } from "../models";
 import { formatAmount, formatDate } from "../utils/formatters";
 import { AccountIcon, CheckBox } from "./elements";
 
-export interface Props {
+interface Props {
   data: Transaction;
   selectionChange: (id: string, state: boolean) => void;
   isChecked: boolean;

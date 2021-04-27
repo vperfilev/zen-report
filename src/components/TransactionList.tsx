@@ -9,8 +9,7 @@ import {
   RemoveTransactionsFromSelectedReport,
   AddTransactionsToSelectedReport,
 } from "./../redux/actionCreators";
-import TransactionRow from "./TransactionRow";
-import TransactionHeaderRow from "./TransactionHeaderRow";
+import { TransactionHeaderRow, TransactionRow } from "./";
 import { getSelectedAccountsTransactions } from "../utils/dataLogic";
 
 const mapStateToProps = (state: State) => ({
