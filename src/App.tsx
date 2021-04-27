@@ -1,7 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { Logo, AccountsPanel, FilePanel } from "./components";
-import BlockDivider from "./components/BlockDivider";
+import BlockDivider from "./components/elements/BlockDivider";
 import DetailsPanel from "./components/DetailsPanel";
 import IncomeReport from "./components/IncomeReport";
 import MdExport from "./components/MdExport";

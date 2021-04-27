@@ -21,8 +21,7 @@ const mergeProps = (
   return { ...ownProps, ...stateProps, ...dispatchProps };
 };
 
-type Props = ReturnType<typeof mapDispatchToProps> &
-  ReturnType<typeof mergeProps>;
+type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mergeProps>;
 
 function AccountRow({ account, AccountSelectionChange }: Props) {
   return (
@@ -37,8 +36,4 @@ function AccountRow({ account, AccountSelectionChange }: Props) {
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  mergeProps
-)(AccountRow);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AccountRow);

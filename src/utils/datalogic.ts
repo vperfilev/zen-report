@@ -1,4 +1,4 @@
-import { Account, Transaction, ReportType } from "./../models";
+import { Account, Transaction, ReportType } from "../models";
 
 export function getSelectedAccountsTransactions(transactions: Transaction[], accounts: Account[], reportType: ReportType): Transaction[] {
     const selectedAccounts = accounts.filter((a) => a.isSelected);

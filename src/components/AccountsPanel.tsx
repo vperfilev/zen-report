@@ -3,7 +3,7 @@ import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
-import {List} from "./elements";
+import { List } from "./elements";
 import AccountLine from "./AccountLine";
 
 const mapStateToProps = (state: State) => ({ accounts: state.accounts });
@@ -13,11 +13,11 @@ type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchT
 function AccountsPanel({ accounts }: Props) {
   return (
     <div>
-    <List header="Счета">
-      {accounts.map((a) => (
-        <AccountLine account={a} key={a.name} />
-      ))}
-    </List>
+      <List header="Счета">
+        {accounts.map((a) => (
+          <AccountLine account={a} key={a.name} />
+        ))}
+      </List>
     </div>
   );
 }
