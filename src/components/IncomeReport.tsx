@@ -68,6 +68,7 @@ const IncomeReport: FC<Props> = ({
             editType="title"
             onChanged={(title) => RenameReportName(r.id, title as string)}
             isSelected={r.id === selectedReportRow?.id}
+            key={r.id}
           />
         ))}
         <AmountRow
@@ -76,12 +77,14 @@ const IncomeReport: FC<Props> = ({
           editType="hideIcon"
           onClick={() => SelectReportRow(ReportType.income)}
           isSelected={isRestSelected}
+          key="income"
         />
         <AmountRow
           title="Отложено"
           amount={savings}
           editType="amount"
           onChanged={(value) => SetSavingsAmount(value as number)}
+          key="savings"
         />
       </List>
       <div className="flex mt-2">

@@ -64,6 +64,7 @@ const OutcomeReport: FC<Props> = ({
             editType="title"
             onChanged={(title) => RenameReportName(r.id, title as string)}
             isSelected={r.id === selectedReportRow?.id}
+            key={r.id}
           />
         ))}
         <AmountRow
@@ -72,6 +73,7 @@ const OutcomeReport: FC<Props> = ({
           editType="hideIcon"
           onClick={() => SelectReportRow(ReportType.outcome)}
           isSelected={isRestSelected}
+          key="outcome"
         />
       </List>
       <div className="flex mt-2">

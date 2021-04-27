@@ -84,6 +84,7 @@ function TransactionList({
           transactionSum={catAmount}
           selectionIsEnabled={selectionIsEnabled}
           level={0}
+          key={"header-0-" + transaction.category}
         />
       );
     }
@@ -113,6 +114,7 @@ function TransactionList({
           transactionSum={subCatAmount}
           selectionIsEnabled={selectionIsEnabled}
           level={1}
+          key={"header-1-" + transaction.subCategory}
         />
       );
     }
