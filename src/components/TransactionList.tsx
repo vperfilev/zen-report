@@ -9,7 +9,6 @@ import {
   RemoveTransactionsFromSelectedReport,
   AddTransactionsToSelectedReport,
 } from "./../redux/actionCreators";
-import { ReportType } from "../models/ReportType";
 import TransactionRow from "./TransactionRow";
 import TransactionHeaderRow from "./TransactionHeaderRow";
 import { getSelectedAccountsTransactions } from "../utils/datalogic";
@@ -66,9 +65,7 @@ function TransactionList({
     if (transaction.category !== previousCat) {
       previousCat = transaction.category;
       previousSubCat = null;
-      const catTransactions = filteredTransactions.filter(
-        (t) => t.category === previousCat
-      );
+      const catTransactions = filteredTransactions.filter((t) => t.category === transaction.category);
       const catAmount = Math.abs(
         catTransactions.reduce<number>(
           (acc, transaction) => acc + transaction.amount,
@@ -96,9 +93,8 @@ function TransactionList({
       transaction.subCategory !== ""
     ) {
       previousSubCat = transaction.subCategory;
-      const subCatTransactions = filteredTransactions.filter(
-        (t) => t.category === previousCat && t.subCategory == previousSubCat
-      );
+
+      const subCatTransactions = filteredTransactions.filter((t) => t.category === transaction.category && t.subCategory === transaction.subCategory);
       const subCatAmount = Math.abs(
         subCatTransactions.reduce<number>(
           (acc, transaction) => acc + transaction.amount,
