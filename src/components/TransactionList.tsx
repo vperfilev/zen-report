@@ -44,6 +44,7 @@ function TransactionList({
   AddTransactionsToSelectedReport,
 }: Props) {
   const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType).filter(t=>t.reportId === selectedReport?.id || t.reportId === undefined);
+  
   const accountColours: { [id: string]: string } = {};
   accounts.filter((a) => a.isSelected).forEach((a) => (accountColours[a.name] = a.colour));
   const selectionIsEnabled = selectedReport !== undefined;
@@ -63,60 +64,40 @@ function TransactionList({
   for (let i = 0; i < filteredTransactions.length; i++) {
     const transaction = filteredTransactions[i];
     if (transaction.category !== previousCat) {
-      previousCat = transaction.category;
-      previousSubCat = null;
       const catTransactions = filteredTransactions.filter((t) => t.category === transaction.category);
-      const catAmount = Math.abs(
-        catTransactions.reduce<number>(
-          (acc, transaction) => acc + transaction.amount,
-          0
-        )
-      );
+      const catAmount = Math.abs(catTransactions.reduce<number>((acc, transaction) => acc + transaction.amount, 0));
       elements.push(
         <TransactionHeaderRow
-          checked={catTransactions.reduce<boolean>(
-            (acc, transaction) => transaction.reportId !== undefined && acc,
-            true
-          )}
+          checked={catTransactions.reduce<boolean>((acc, transaction) => transaction.reportId !== undefined && acc, true)}
           onChange={handleTransactionsChanges}
           transactionIds={catTransactions.map((t) => t.id)}
-          categoryName={previousCat === "" ? "* * *" : previousCat}
+          categoryName={transaction.category === "" ? "* * *" : transaction.category}
           transactionSum={catAmount}
           selectionIsEnabled={selectionIsEnabled}
           level={0}
           key={"header-0-" + transaction.category}
         />
       );
+      previousCat = transaction.category;
+      previousSubCat = null;
     }
 
-    if (
-      transaction.subCategory !== previousSubCat &&
-      transaction.subCategory !== ""
-    ) {
-      previousSubCat = transaction.subCategory;
-
+    if (transaction.subCategory !== previousSubCat && transaction.subCategory !== "") {
       const subCatTransactions = filteredTransactions.filter((t) => t.category === transaction.category && t.subCategory === transaction.subCategory);
-      const subCatAmount = Math.abs(
-        subCatTransactions.reduce<number>(
-          (acc, transaction) => acc + transaction.amount,
-          0
-        )
-      );
+      const subCatAmount = Math.abs(subCatTransactions.reduce<number>((acc, transaction) => acc + transaction.amount, 0));
       elements.push(
         <TransactionHeaderRow
-          checked={subCatTransactions.reduce<boolean>(
-            (acc, transaction) => transaction.reportId !== undefined && acc,
-            true
-          )}
+          checked={subCatTransactions.reduce<boolean>((acc, transaction) => transaction.reportId !== undefined && acc, true)}
           onChange={handleTransactionsChanges}
           transactionIds={subCatTransactions.map((t) => t.id)}
-          categoryName={previousSubCat === "" ? "* * *" : previousSubCat}
+          categoryName={transaction.subCategory === "" ? "* * *" : transaction.subCategory}
           transactionSum={subCatAmount}
           selectionIsEnabled={selectionIsEnabled}
           level={1}
           key={"header-1-" + transaction.subCategory}
         />
       );
+      previousSubCat = transaction.subCategory;
     }
 
     elements.push(
