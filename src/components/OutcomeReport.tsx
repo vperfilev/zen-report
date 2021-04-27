@@ -11,7 +11,7 @@ import {
 } from "./../redux/actionCreators";
 import { List, PrimaryButton, SecondaryButton } from "./elements";
 import { AmountRow } from "./";
-import { getSelectedAccountsTransactions, genId, sumTransactionsByReports } from "../utils/datalogic";
+import { getSelectedAccountsTransactions, genId, sumTransactionsByReports } from "../utils/dataLogic";
 import { ReportType } from "../models";
 
 const mapStateToProps = (state: State) => ({

@@ -5,7 +5,7 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
 import {} from "./../redux/actionCreators";
 import { PrimaryButton } from "./elements";
-import { getSelectedAccountsTransactions, sumTransactionsByReports } from "../utils/datalogic";
+import { getSelectedAccountsTransactions, sumTransactionsByReports } from "../utils/dataLogic";
 import { ReportRow, ReportType, Transaction } from "../models";
 
 const mapStateToProps = (state: State) => ({

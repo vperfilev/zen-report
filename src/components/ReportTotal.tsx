@@ -5,7 +5,7 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 
 import {List} from "./elements";
 import { ReportType } from "../models";
-import { getSelectedAccountsTransactionsAmount } from "../utils/datalogic";
+import { getSelectedAccountsTransactionsAmount } from "../utils/dataLogic";
 import AmountRow from "./AmountRow";
 
 const mapStateToProps = (state: State) => ({ 

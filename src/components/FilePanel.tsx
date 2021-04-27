@@ -7,7 +7,7 @@ import { CSVReader } from 'react-papaparse';
 import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
 import { Transaction } from "./../models";
-import { genId } from "../utils/datalogic";
+import { genId } from "../utils/dataLogic";
 
 const mapStateToProps = (state: State) => ({});
 

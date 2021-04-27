@@ -11,7 +11,7 @@ import {
 } from "./../redux/actionCreators";
 import TransactionRow from "./TransactionRow";
 import TransactionHeaderRow from "./TransactionHeaderRow";
-import { getSelectedAccountsTransactions } from "../utils/datalogic";
+import { getSelectedAccountsTransactions } from "../utils/dataLogic";
 
 const mapStateToProps = (state: State) => ({
   transactions: state.transactions,
