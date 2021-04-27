@@ -30,23 +30,19 @@ function FilePanel({ PutTransactions }: Props) {
   };
 
   const parseTransaction = (data: any, id: string): Transaction | null => {
-      if (data[4] && data[7]) {
-          return null
+      const incomeAmount = parseNumber(data[8]);
+      const outcomeAmount = parseNumber(data[5]);
+      const amount = incomeAmount - outcomeAmount;
+      if (amount === 0){
+        return null;
       }
 
-      const transactionType = data[8] ? ReportType.outcome : ReportType.income;
-      
       const categoryNames: string[] = data[1] && data[1].split('/').map((x: string) => x.trim());
       const categoryName = categoryNames !== undefined ? categoryNames[0] : "";
       const subCategoryName = categoryNames !== undefined ? categoryNames[1] : "";
       
-      let amountString = transactionType === ReportType.outcome ? data[8] : data[5];
-      amountString = amountString ? amountString : '0';
-      amountString = amountString.replace(',', '.');
-      const amount = Number.parseFloat(amountString);
-
       return {
-        account: transactionType === ReportType.outcome ? data[4] : data[7],
+        account: amount < 0 ? data[4] : data[7],
         amount: amount,
         category: categoryName ?? "",
         subCategory: subCategoryName ?? "", 
@@ -58,6 +54,14 @@ function FilePanel({ PutTransactions }: Props) {
 
       } as Transaction;
   };
+
+  const parseNumber = (value: string): number => {
+    if(!value){
+      return 0;
+    }
+    const result = Number.parseFloat(value.replace(',', '.'));
+    return isNaN(result) ? 0 : result;
+  }
   
   const handleOnError = (err: any, file: any, inputElem: any, reason: any) => {
     console.log(err);
