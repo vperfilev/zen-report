@@ -16,11 +16,7 @@ import { ReportType } from "../models";
 
 const mapStateToProps = (state: State) => ({
   reportRows: state.outcomeReport,
-  transactions: getSelectedAccountsTransactions(
-    state.transactions,
-    state.accounts,
-    ReportType.outcome
-  ),
+  transactions: getSelectedAccountsTransactions(state.transactions, state.accounts, ReportType.outcome),
   selectedReportRow: state.selectedReportRow,
   selectedReportType: state.selectedReportType,
 });
