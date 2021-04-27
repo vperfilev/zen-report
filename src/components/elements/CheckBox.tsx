@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 
-interface ICheckBoxProps {
+interface Props {
   checked: boolean;
   changed: (state: boolean) => void;
   enabled?: boolean;
   labelText?: string;
 }
-const CheckBox: FC<ICheckBoxProps> = ({
+const CheckBox: FC<Props> = ({
   labelText,
   changed,
   checked,

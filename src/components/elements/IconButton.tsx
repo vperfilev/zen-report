@@ -1,7 +1,7 @@
-import * as React from "react";
+import React, { FC } from "react";
 import { DoneIcon, EditIcon } from "../icons";
 
-export interface Props {
+interface Props {
     iconType: "edit" | "done" 
     onClick: () => void
 }
@@ -14,7 +14,7 @@ function getIcon(type: string):JSX.Element {
     }
 }
 
-export function IconButton({onClick, iconType}: Props) {
+export const IconButton: FC<Props> = ({onClick, iconType}) => {
   return (
     <button className="focus:outline-none w-6 h-6 flex items-center px-1 text-gray-300 hover:text-gray-700"
         onClick={onClick}>

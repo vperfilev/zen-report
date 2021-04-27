@@ -1,12 +1,12 @@
 import React, { FC, ReactNode } from "react";
 import { ComponentTitle } from ".";
 
-export interface Props {
+interface Props {
   [x: string]: ReactNode;
   header: string;
 }
 
-const List: FC<Props> = (props: Props) => {
+export const List: FC<Props> = (props: Props) => {
   return (
     <div className="divide-y-2 divide-gray-300">
       <ComponentTitle text={props.header} />
@@ -14,5 +14,3 @@ const List: FC<Props> = (props: Props) => {
     </div>
   );
 };
-
-export default List;
