@@ -8,6 +8,7 @@ import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
 import { Transaction } from "./../models";
 import { genId } from "../utils/dataLogic";
+import ym from "../utils/yandexMetrica";
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
   bindActionCreators({ PutTransactions }, dispatch);
@@ -28,6 +29,7 @@ function FilePanel({ PutTransactions }: Props) {
 
     const deselectedAccounts = (objStore.get('disabled-accounts') ?? []) as Array<string>;
     
+    ym("reachGoal", "OpenData");
     PutTransactions(transactions, deselectedAccounts);
   };
 

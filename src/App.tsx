@@ -14,8 +14,10 @@ import {
   ReportTotal,
   TransactionList,
 } from "./components";
+import ym from "./utils/yandexMetrica";
 
 function App() {
+  ym("hit", "/zen-report");
   return (
     <Provider store={store}>
       <div className="flex mx-6 pb-2 border-b-2 space-y-">

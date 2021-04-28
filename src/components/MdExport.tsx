@@ -6,6 +6,7 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { PrimaryButton } from "./elements";
 import { getSelectedAccountsTransactions, sumTransactionsByReports } from "../utils/dataLogic";
 import { ReportRow, ReportType, Transaction } from "../models";
+import ym from "../utils/yandexMetrica";
 
 const mapStateToProps = (state: State) => ({
     savings: state.savings,
@@ -72,6 +73,7 @@ function fillReport(report: MdReportRow[], header: string) {
 const MdExport: FC<Props> = ({savings, incomeTransactions, incomeReport, outcomeTransactions, outcomeReport}) => {
 
   const exportReport = () => {
+    ym("reachGoal", "ExportData");
     let incomeReportData = getReportBody(incomeReport, sumTransactionsByReports(incomeTransactions));
     if (savings !== 0) incomeReportData.push({name: "Отложено", amount: savings.toFixed(2)});
     incomeReportData = addAdditionalRows(incomeReportData, incomeTransactions, "Источник", "Сумма", savings);
