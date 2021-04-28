@@ -82,25 +82,24 @@ function FilePanel({ PutTransactions }: Props) {
   };
 
   return (
-    <div className="flex-grow mb-3 ml-6 h-12 grid justify-items-stretch">
+    <div className="flex-grow mb-3 h-12">
       <CSVReader
         ref={csvEl}
         onFileLoad={handleOnFileLoad}
         onError={handleOnError}
         noClick
+        noProgressBar={true}
         noDrag
         onRemoveFile={handleOnRemoveFile}
       >
         {({ file }: any) => (
-          <div className="flex ml-auto">
-            <div className="w-96 border-2 border-gray-300 mr-1 ml-32 align-middle p-2 justify-self-end">
-              <p className="overflow-ellipsis overflow-hidden">
-                {file && file.name}
-              </p>
+          <div className="flex flex-row-reverse mx-auto mt-5">
+            <div className="flex w-64">
+              <PrimaryButton text="Загрузить" onClick={(e) => handleOpenDialog(csvEl, e)} />
+              <SecondaryButton text="Очистить" onClick={(e) => handleRemoveFile(csvEl, e)} />
             </div>
-            <div className="w-64 flex">
-              <PrimaryButton text="Загрузить" onClick={(e) => handleOpenDialog(csvEl, e)}/>
-              <SecondaryButton text="Очистить" onClick={(e) => handleRemoveFile(csvEl, e)}/>
+            <div className="w-80 py-auto border-2 border-gray-300 mr-1 align-middle px-2 overflow-ellipsis overflow-hidden">
+              {file && file.name}
             </div>
           </div>
         )}

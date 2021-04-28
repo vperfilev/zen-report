@@ -15,7 +15,7 @@ export const SecondaryButton: FC<Props> = ({
     <button
       disabled={disabled === true}
       className={
-        "focus:outline-none disabled:opacity-50  text-white text-sm py-2 w-5 flex-grow mr-1 bg-green-900" +
+        "h-9 focus:outline-none disabled:opacity-50  text-white text-sm py-2 w-5 flex-grow mr-1 bg-green-900" +
         (disabled !== true ? " hover:bg-green-600 hover:shadow-md" : " cursor-not-allowed")
       }
       onClick={onClick}
