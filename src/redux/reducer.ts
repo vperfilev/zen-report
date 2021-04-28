@@ -59,17 +59,17 @@ export default function reducer(
         "#800080",
       ];
 
-      const accounts: Account[] = action.payload
+      const accounts: Account[] = action.payload.transactions
         .map((t) => t.account)
         .filter((value, index, self) => self.indexOf(value) === index)
         .sort((a,b) => a.localeCompare(b))
         .map((name, index) => ({
           name,
-          isSelected: true,
+          isSelected: action.payload.deselectedAccounts.findIndex(d => d === name) === -1,
           colour: colorList[index % colorList.length],
         }));
 
-      const sortedTransactions = action.payload.sort((a,b) => 
+      const sortedTransactions = action.payload.transactions.sort((a,b) => 
         a.category === b.category ? 
           a.subCategory.localeCompare(b.subCategory) : 
           a.category.localeCompare(b.category));

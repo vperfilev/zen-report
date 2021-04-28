@@ -26,12 +26,13 @@ import {
 } from "./actions";
 
 export function PutTransactions(
-  transactions: Transaction[]
+  transactions: Transaction[],
+  deselectedAccounts: string[] = []
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
     const action: PutTransactionsAction = {
       type: PUT_TRANSACTIONS,
-      payload: transactions,
+      payload: {transactions, deselectedAccounts},
     };
     return dispatch(action);
   };

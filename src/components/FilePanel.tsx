@@ -2,6 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { CSVReader } from "react-papaparse";
+import * as objStore from "store";
 
 import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
@@ -24,7 +25,10 @@ function FilePanel({ PutTransactions }: Props) {
         parseTransaction(x.data, baseId + "-" + index)
       )
       .filter((x: Transaction) => x !== null);
-    PutTransactions(transactions);
+
+    const deselectedAccounts = (objStore.get('disabled-accounts') ?? []) as Array<string>;
+    
+    PutTransactions(transactions, deselectedAccounts);
   };
 
   const parseTransaction = (data: any, id: string): Transaction | null => {
@@ -35,8 +39,7 @@ function FilePanel({ PutTransactions }: Props) {
       return null;
     }
 
-    const categoryNames: string[] =
-      data[1] && data[1].split("/").map((x: string) => x.trim());
+    const categoryNames: string[] = data[1] && data[1].split("/").map((x: string) => x.trim());
     const categoryName = categoryNames !== undefined ? categoryNames[0] : "";
     const subCategoryName = categoryNames !== undefined ? categoryNames[1] : "";
 

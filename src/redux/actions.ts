@@ -16,7 +16,7 @@ export const SET_SAVING_AMOUNT = "SET_SAVING_AMOUNT";
 
 export interface PutTransactionsAction {
   type: typeof PUT_TRANSACTIONS;
-  payload: Transaction[];
+  payload: { transactions: Transaction[], deselectedAccounts: string[] };
 }
 
 export interface SelectReportRowAction {
