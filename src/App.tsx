@@ -15,6 +15,7 @@ import {
   TransactionList,
 } from "./components";
 import ym from "./utils/yandexMetrica";
+import { LanguageSelector } from "./components/LanguageSelector";
 
 function App() {
   ym("hit", "/zen-report");
@@ -23,6 +24,7 @@ function App() {
       <div className="flex mx-6 pb-2 border-b-2 space-y-">
         <Logo />
         <FilePanel />
+        <LanguageSelector />
       </div>
       <div className="flex items-stretch pt-4">
         <div className="w-1/4 border-gray-300 ml-5 border-r-2 pr-5 flex-shrink-0">

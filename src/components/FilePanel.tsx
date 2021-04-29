@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { CSVReader } from "react-papaparse";
 import * as objStore from "store";
+import { useTranslation } from 'react-i18next';
 
 import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
@@ -17,6 +18,7 @@ type Props = ReturnType<typeof mapDispatchToProps>;
 
 function FilePanel({ PutTransactions }: Props) {
   const csvEl = React.useRef(null);
+  const { t, i18n } = useTranslation();
 
   const handleOnFileLoad = (data: any) => {
     const baseId = genId();
@@ -87,7 +89,7 @@ function FilePanel({ PutTransactions }: Props) {
   };
 
   return (
-    <div className="flex-grow mb-3 h-12">
+    <div className="flex-grow mb-3 h-12 mt-6">
       <CSVReader
         ref={csvEl}
         onFileLoad={handleOnFileLoad}
@@ -100,8 +102,8 @@ function FilePanel({ PutTransactions }: Props) {
         {({ file }: any) => (
           <div className="flex flex-row-reverse mx-auto mt-5">
             <div className="flex w-64">
-              <PrimaryButton text="Загрузить" onClick={(e) => handleOpenDialog(csvEl, e)} />
-              <SecondaryButton text="Очистить" onClick={(e) => handleRemoveFile(csvEl, e)} />
+              <PrimaryButton text={t('file-load')} onClick={(e) => handleOpenDialog(csvEl, e)} />
+              <SecondaryButton text={t('file-clear')} onClick={(e) => handleRemoveFile(csvEl, e)} />
             </div>
             <div className="w-80 py-auto border-2 border-gray-300 mr-1 align-middle px-2 overflow-ellipsis overflow-hidden">
               {file && file.name}
