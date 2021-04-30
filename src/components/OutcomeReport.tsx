@@ -46,7 +46,9 @@ const OutcomeReport: FC<Props> = ({
   const reportAmounts = sumTransactionsByReports(transactions);
   const isRestSelected = selectedReportType === ReportType.outcome && selectedReportRow === undefined;
   const addReport = () => {
-    AddReportRow({ id: genId(), name: "Расход" }, ReportType.outcome)
+    const id = genId();
+    AddReportRow({ id: id, name: "Расход" }, ReportType.outcome);
+    SelectReportRow(id);
   };
 
   return (

@@ -57,6 +57,12 @@ const IncomeReport: FC<Props> = ({
   const reportAmounts = sumTransactionsByReports(transactions);
   const isRestSelected = selectedReportType === ReportType.income && selectedReportRow === undefined;
 
+  const addNewReportRow = () => {
+    const id = genId();
+    AddReportRow({ id: id, name: "Расход" }, ReportType.income);
+    SelectReportRow(id);
+  };
+
   return (
     <>
       <List header="Доходы">
@@ -90,8 +96,7 @@ const IncomeReport: FC<Props> = ({
       <div className="flex mt-2">
         <PrimaryButton
           text="Добавить"
-          onClick={() => AddReportRow({ id: genId(), name: "Расход" }, ReportType.income)
-          }
+          onClick={() => addNewReportRow()}
         />
         <SecondaryButton
           text="Удалить"
