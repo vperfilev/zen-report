@@ -2,6 +2,7 @@ import * as React from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { useTranslation } from "react-i18next";
 
 import { List } from "./elements";
 import { formatAmount, formatDate } from "../utils/formatters";
@@ -14,14 +15,15 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 function DetailsPanel({transaction}: Props) {
+  const { t, i18n } = useTranslation();
   return (
-    <List header="Детали">
-      {transaction && <DetailsRow title="Дата" value={formatDate(transaction.time)} mutedValue={false}/>}
-      {transaction && <DetailsRow title="Сумма" value={formatAmount(transaction.amount)} mutedValue={false}/>}
-      {transaction && <DetailsRow title="Категория" value={`${transaction.category}${(transaction.category === "" || transaction.subCategory === "" ? "" : " / ")}${transaction.subCategory}`} mutedValue={false}/>}
-      {transaction && <DetailsRow title="Счет" value={transaction.account} mutedValue={false}/>}
-      {transaction && <DetailsRow title="Место" value={transaction.place} mutedValue={true}/>}
-      {transaction && <DetailsRow title="Коментарий" value={transaction.comment} mutedValue={true}/>}
+    <List header={t("details")}>
+      {transaction && <DetailsRow title={t("date")} value={formatDate(transaction.time)} mutedValue={false}/>}
+      {transaction && <DetailsRow title={t("amount")} value={formatAmount(transaction.amount)} mutedValue={false}/>}
+      {transaction && <DetailsRow title={t("category")} value={`${transaction.category}${(transaction.category === "" || transaction.subCategory === "" ? "" : " / ")}${transaction.subCategory}`} mutedValue={false}/>}
+      {transaction && <DetailsRow title={t("subcategory")} value={transaction.account} mutedValue={false}/>}
+      {transaction && <DetailsRow title={t("place")} value={transaction.place} mutedValue={true}/>}
+      {transaction && <DetailsRow title={t("commentary")} value={transaction.comment} mutedValue={true}/>}
     </List>
   );
 }

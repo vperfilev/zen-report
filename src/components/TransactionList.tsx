@@ -2,6 +2,7 @@ import * as React from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { useTranslation } from "react-i18next";
 
 import {List} from "./elements";
 import {
@@ -42,6 +43,7 @@ function TransactionList({
   RemoveTransactionsFromSelectedReport,
   AddTransactionsToSelectedReport,
 }: Props) {
+  const { t, i18n } = useTranslation();
   const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType).filter(t=>t.reportId === selectedReport?.id || t.reportId === undefined);
   
   const accountColours: { [id: string]: string } = {};
@@ -115,7 +117,7 @@ function TransactionList({
 
   return (
     <div>
-      <List header="Транзакции">{elements}</List>
+      <List header={t("transactions")}>{elements}</List>
     </div>
   );
 }

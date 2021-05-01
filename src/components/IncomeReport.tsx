@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { useTranslation } from "react-i18next";
 
 import {
   SetSavingsAmount,
@@ -54,18 +55,19 @@ const IncomeReport: FC<Props> = ({
   transactions,
   RenameReportName,
 }) => {
+  const { t, i18n } = useTranslation();
   const reportAmounts = sumTransactionsByReports(transactions);
   const isRestSelected = selectedReportType === ReportType.income && selectedReportRow === undefined;
 
   const addNewReportRow = () => {
     const id = genId();
-    AddReportRow({ id: id, name: "Расход" }, ReportType.income);
+    AddReportRow({ id: id, name: t("income") }, ReportType.income);
     SelectReportRow(id);
   };
 
   return (
     <>
-      <List header="Доходы">
+      <List header={t("incomes")}>
         {reportRows.map((r) => (
           <AmountRow
             title={r.name}
@@ -78,7 +80,7 @@ const IncomeReport: FC<Props> = ({
           />
         ))}
         <AmountRow
-          title="Прочее"
+          title={t("other")}
           amount={reportAmounts["unreported"]}
           editType="hideIcon"
           onClick={() => SelectReportRow(ReportType.income)}
@@ -86,7 +88,7 @@ const IncomeReport: FC<Props> = ({
           key="income"
         />
         <AmountRow
-          title="Отложено"
+          title={t("savings")}
           amount={savings}
           editType="amount"
           onChanged={(value) => SetSavingsAmount(value as number)}
@@ -95,11 +97,11 @@ const IncomeReport: FC<Props> = ({
       </List>
       <div className="flex mt-2">
         <PrimaryButton
-          text="Добавить"
+          text={t("add")}
           onClick={() => addNewReportRow()}
         />
         <SecondaryButton
-          text="Удалить"
+          text={t("delete")}
           onClick={DeleteSelectedReportRow}
           disabled={isRestSelected || selectedReportType !== ReportType.income}
         />

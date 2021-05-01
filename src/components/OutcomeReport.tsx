@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { useTranslation } from "react-i18next";
 
 import {
   AddReportRow,
@@ -43,17 +44,18 @@ const OutcomeReport: FC<Props> = ({
   transactions,
   RenameReportName,
 }) => {
+  const { t, i18n } = useTranslation();
   const reportAmounts = sumTransactionsByReports(transactions);
   const isRestSelected = selectedReportType === ReportType.outcome && selectedReportRow === undefined;
   const addReport = () => {
     const id = genId();
-    AddReportRow({ id: id, name: "Расход" }, ReportType.outcome);
+    AddReportRow({ id: id, name: t("outcome") }, ReportType.outcome);
     SelectReportRow(id);
   };
 
   return (
     <>
-      <List header="Расходы">
+      <List header={t("outcomes")}>
         {reportRows.map((r) => (
           <AmountRow
             title={r.name}
@@ -66,7 +68,7 @@ const OutcomeReport: FC<Props> = ({
           />
         ))}
         <AmountRow
-          title="Прочее"
+          title={t("other")}
           amount={Math.abs(reportAmounts["unreported"])}
           editType="hideIcon"
           onClick={() => SelectReportRow(ReportType.outcome)}
@@ -75,8 +77,8 @@ const OutcomeReport: FC<Props> = ({
         />
       </List>
       <div className="flex mt-2">
-        <PrimaryButton text="Добавить" onClick={addReport} />
-        <SecondaryButton text="Удалить" onClick={DeleteSelectedReportRow} disabled={isRestSelected || selectedReportType !== ReportType.outcome}/>
+        <PrimaryButton text={t("add")} onClick={addReport} />
+        <SecondaryButton text={t("delete")} onClick={DeleteSelectedReportRow} disabled={isRestSelected || selectedReportType !== ReportType.outcome}/>
       </div>
     </>
   );

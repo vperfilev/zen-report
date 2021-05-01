@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
+import { useTranslation } from "react-i18next";
 
 import { List } from "./elements";
 import { ReportType } from "../models";
@@ -18,11 +19,12 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 const ReportTotal: FC<Props> = ({incomeAmount, outcomeAmount, savings}) =>{
+    const { t, i18n } = useTranslation();
     return (
-        <List header="Баланс">
-            <AmountRow title="Доход" amount={Math.abs(incomeAmount - savings)}/>
-            <AmountRow title="Расход" amount={Math.abs(outcomeAmount)}/>
-            <AmountRow title="Баланс" amount={incomeAmount - savings - outcomeAmount}/>
+        <List header={t("total-balance")}>
+            <AmountRow title={t("total-income")} amount={Math.abs(incomeAmount - savings)}/>
+            <AmountRow title={t("total-outcome")} amount={Math.abs(outcomeAmount)}/>
+            <AmountRow title={t("total-balance")} amount={incomeAmount - savings - outcomeAmount}/>
         </List>
     );
 }
