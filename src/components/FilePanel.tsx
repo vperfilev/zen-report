@@ -18,7 +18,7 @@ type Props = ReturnType<typeof mapDispatchToProps>;
 
 function FilePanel({ PutTransactions }: Props) {
   const csvEl = React.useRef(null);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const handleOnFileLoad = (data: any) => {
     const baseId = genId();

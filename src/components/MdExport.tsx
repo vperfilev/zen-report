@@ -56,7 +56,7 @@ function fillReport(report: MdReportRow[], header: string) {
 }
 
 const MdExport: FC<Props> = ({savings, incomeTransactions, incomeReport, outcomeTransactions, outcomeReport}) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const addAdditionalRows = (report: MdReportRow[], transactions: Transaction[], col1Name: string, col2Name: string, savings=0) =>{
     const total = Math.abs(transactions.reduce((a, t) => a + t.amount, 0));

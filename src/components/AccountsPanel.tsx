@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 function AccountsPanel({ accounts }: Props) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <div>
       <List header={t("accounts")}>

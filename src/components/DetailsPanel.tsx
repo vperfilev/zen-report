@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 function DetailsPanel({transaction}: Props) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return (
     <List header={t("details")}>
       {transaction && <DetailsRow title={t("date")} value={formatDate(transaction.time)} mutedValue={false}/>}

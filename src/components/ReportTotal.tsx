@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 const ReportTotal: FC<Props> = ({incomeAmount, outcomeAmount, savings}) =>{
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <List header={t("total-balance")}>
             <AmountRow title={t("total-income")} amount={Math.abs(incomeAmount - savings)}/>

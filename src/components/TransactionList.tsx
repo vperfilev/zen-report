@@ -43,7 +43,7 @@ function TransactionList({
   RemoveTransactionsFromSelectedReport,
   AddTransactionsToSelectedReport,
 }: Props) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType).filter(t=>t.reportId === selectedReport?.id || t.reportId === undefined);
   
   const accountColours: { [id: string]: string } = {};

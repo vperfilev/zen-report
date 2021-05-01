@@ -55,7 +55,7 @@ const IncomeReport: FC<Props> = ({
   transactions,
   RenameReportName,
 }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const reportAmounts = sumTransactionsByReports(transactions);
   const isRestSelected = selectedReportType === ReportType.income && selectedReportRow === undefined;
 
