@@ -69,11 +69,10 @@ i18n
   .init({resources,
     fallbackLng: 'en',
     detection: {
-      order: ['queryString', 'cookie'],
+      order: ['localStorage', 'cookie'],
       cache: ['cookie']
     },
-    lng: "en",
-      keySeparator: false, 
+    keySeparator: false, 
 
     interpolation: {
       escapeValue: false 
