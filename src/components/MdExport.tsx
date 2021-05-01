@@ -87,7 +87,7 @@ const MdExport: FC<Props> = ({savings, incomeTransactions, incomeReport, outcome
 
     const incomeAmount = incomeTransactions.reduce((a,t)=>a+t.amount, 0) - savings;
     const outcomeAmount = outcomeTransactions.reduce((a,t)=>a-t.amount, 0);
-    const total = `t("total-balance"): ${incomeAmount.toFixed(2)} - ${outcomeAmount.toFixed(2)} = **${(incomeAmount - outcomeAmount).toFixed(2)}**\n`;
+    const total = `${t("total-balance")}: ${incomeAmount.toFixed(2)} - ${outcomeAmount.toFixed(2)} = **${(incomeAmount - outcomeAmount).toFixed(2)}**\n`;
 
     navigator.clipboard.writeText(incomeMdReport + outcomeMdReport + total);
   };

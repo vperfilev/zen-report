@@ -8,7 +8,7 @@ const resources = {
       "file-load": "Load file",
       "file-clear": "Clear data",
       "incomes": "Earned",
-      "other": "Rest incomes",
+      "other": "Rest transactions",
       "savings": "Savings",
       "outcome": "Outcome",
       "income": "Income", 
