@@ -74,7 +74,17 @@ export default function reducer(
           a.subCategory.localeCompare(b.subCategory) : 
           a.category.localeCompare(b.category));
 
-      return { ...state, transactions: sortedTransactions, accounts: accounts };
+      return {
+        ...state,
+        transactions: sortedTransactions,
+        accounts: accounts,
+        incomeReport: [],
+        outcomeReport: [],
+        savings: 0,
+        selectedReportRow: undefined,
+        selectedReportType: ReportType.income,
+        selectedTransactionId: "",
+      };
     }
 
     case SELECT_REPORT_ROW: {
