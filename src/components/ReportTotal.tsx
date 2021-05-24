@@ -29,4 +29,5 @@ const ReportTotal: FC<Props> = ({incomeAmount, outcomeAmount, savings}) =>{
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReportTotal);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(ReportTotal);
+export { connectedComponent as ReportTotal};

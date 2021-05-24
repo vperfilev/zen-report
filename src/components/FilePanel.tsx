@@ -116,4 +116,5 @@ function FilePanel({ putTransactions }: Props) {
   );
 }
 
-export default connect(null, mapDispatchToProps)(FilePanel);
+const connectedComponent = connect(null, mapDispatchToProps)(FilePanel);
+export { connectedComponent as FilePanel};

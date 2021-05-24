@@ -99,4 +99,5 @@ const MdExport: FC<Props> = ({savings, incomeTransactions, incomeReport, outcome
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MdExport);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(MdExport);
+export { connectedComponent as MdExport};

@@ -122,4 +122,5 @@ function TransactionList({
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionList);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(TransactionList);
+export { connectedComponent as TransactionList};

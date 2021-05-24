@@ -6,7 +6,7 @@ interface Props {
     mutedValue: boolean;
 }
 
-export default function DetailsRow ({title, value, mutedValue }: Props) {
+export function DetailsRow ({title, value, mutedValue }: Props) {
   return (
     <div className="py-2 px-2">
         <span className="text-gray-900 mr-2 font-bold">{title}:&nbsp;</span>

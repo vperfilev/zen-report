@@ -114,5 +114,4 @@ const AmountRow: FC<Props> = ({
 };
 
 AmountRow.defaultProps = { editType: "none" };
-
-export default AmountRow;
+export { AmountRow };

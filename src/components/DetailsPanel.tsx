@@ -28,4 +28,5 @@ function DetailsPanel({transaction}: Props) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailsPanel);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(DetailsPanel);
+export { connectedComponent as DetailsPanel};

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default function Logo() {
+export function Logo() {
   return (
     <>
       <div className="font-mono font-extrabold text-5xl text-blue-900 animate-pulse  mb-2 ml-2 mt-6 mr-2 filter blur-sm">

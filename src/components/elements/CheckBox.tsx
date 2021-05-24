@@ -28,4 +28,4 @@ const CheckBox: FC<Props> = ({
 
 CheckBox.defaultProps = { enabled: true, labelText: "" };
 
-export default CheckBox;
+export { CheckBox };

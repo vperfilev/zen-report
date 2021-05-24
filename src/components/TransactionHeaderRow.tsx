@@ -13,7 +13,7 @@ interface Props {
   selectionIsEnabled: boolean;
 }
 
-export default function TransactionHeaderRow({
+export function TransactionHeaderRow({
   checked,
   onChange,
   transactionIds,

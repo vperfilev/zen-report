@@ -13,7 +13,7 @@ interface Props {
   isSelected: boolean;
 }
 
-export default function TransactionRow({ data, isChecked, selectionChange, accountColor, selectionIsEnabled, isSelected, rowSelected}: Props) {
+export function TransactionRow({ data, isChecked, selectionChange, accountColor, selectionIsEnabled, isSelected, rowSelected}: Props) {
   return (
     <div className={"flex flex-grow pr-1 py-2 px-2 hover:bg-blue-100" + (isSelected ? " bg-blue-100" : "")}>
       <CheckBox enabled={selectionIsEnabled} checked={isChecked} changed={(state: boolean) => selectionChange(data.id, state)} />

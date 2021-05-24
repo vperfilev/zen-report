@@ -24,7 +24,7 @@ const mergeProps = (
 
 type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mergeProps>;
 
-function AccountRow({ account, accountSelectionChange }: Props) {
+function AccountLine({ account, accountSelectionChange }: Props) {
   const onAccountChanged = (state: boolean): void => {
     const deselected = (objStore.get("disabled-accounts") ?? []) as Array<string>;
     const newDeselectedAccounts = deselected.filter(a => a !== account.name);
@@ -47,4 +47,5 @@ function AccountRow({ account, accountSelectionChange }: Props) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(AccountRow);
+ const ar = connect(mapStateToProps, mapDispatchToProps, mergeProps)(AccountLine);
+ export  { ar as AccountLine }

@@ -24,4 +24,5 @@ function AccountsPanel({ accounts }: Props) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountsPanel);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(AccountsPanel);
+export { connectedComponent as AccountsPanel};

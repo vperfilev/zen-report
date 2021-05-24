@@ -110,4 +110,5 @@ const IncomeReport: FC<Props> = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(IncomeReport);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(IncomeReport);
+export { connectedComponent as IncomeReport};

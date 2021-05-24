@@ -84,4 +84,5 @@ const OutcomeReport: FC<Props> = ({
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutcomeReport);
+const connectedComponent = connect(mapStateToProps, mapDispatchToProps)(OutcomeReport);
+export { connectedComponent as OutcomeReport};
