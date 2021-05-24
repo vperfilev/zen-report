@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { PrimaryButton, SecondaryButton } from "./elements";
 import { PutTransactions } from "./../redux/actionCreators";
 import { Transaction } from "./../models";
-import { genId } from "../utils/dataLogic";
+import { genId } from "../utils/dataFunc";
 import ym from "../utils/yandexMetrica";
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>

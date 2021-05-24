@@ -17,7 +17,7 @@ import {
   genId,
   getSelectedAccountsTransactions,
   sumTransactionsByReports,
-} from "../utils/dataLogic";
+} from "../utils/dataFunc";
 import { ReportType } from "../models";
 
 const mapStateToProps = (s: State) => ({

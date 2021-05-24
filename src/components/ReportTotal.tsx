@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { List } from "./elements";
 import { ReportType } from "../models";
-import { getSelectedAccountsTransactionsAmount } from "../utils/dataLogic";
+import { getSelectedAccountsTransactionsAmount } from "../utils/dataFunc";
 import { AmountRow } from "./";
 
 const mapStateToProps = (state: State) => ({ 

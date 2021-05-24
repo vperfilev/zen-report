@@ -5,7 +5,7 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { useTranslation } from "react-i18next";
 
 import { PrimaryButton } from "./elements";
-import { getSelectedAccountsTransactions, sumTransactionsByReports } from "../utils/dataLogic";
+import { getSelectedAccountsTransactions, sumTransactionsByReports } from "../utils/dataFunc";
 import { ReportRow, ReportType, Transaction } from "../models";
 import ym from "../utils/yandexMetrica";
 
