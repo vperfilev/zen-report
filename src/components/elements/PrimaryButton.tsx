@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 interface Props {
   text: string;
-  onClick: (e: any) => void;
+  onClick: (e: React.MouseEvent<HTMLElement>) => void;
   disabled?: boolean;
 }
 

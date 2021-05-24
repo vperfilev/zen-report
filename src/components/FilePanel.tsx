@@ -3,36 +3,37 @@ import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { CSVReader } from "react-papaparse";
 import * as objStore from "store";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { ParseResult } from 'papaparse';
 
 import { PrimaryButton, SecondaryButton } from "./elements";
-import { PutTransactions } from "./../redux/actionCreators";
+import { putTransactions } from "./../redux/actionCreators";
 import { Transaction } from "./../models";
 import { genId } from "../utils/dataFunc";
 import ym from "../utils/yandexMetrica";
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
-  bindActionCreators({ PutTransactions }, dispatch);
+  bindActionCreators({ putTransactions }, dispatch);
 
 type Props = ReturnType<typeof mapDispatchToProps>;
 
-function FilePanel({ PutTransactions }: Props) {
+function FilePanel({ putTransactions }: Props) {
   const csvEl = React.useRef(null);
   const { t } = useTranslation();
 
-  const handleOnFileLoad = (data: any) => {
+  const handleOnFileLoad = (data: ParseResult<any>[]) => {
     const baseId = genId();
     const transactions = data
       .filter((x: any, index: number) => index > 3)
       .map((x: any, index: number) =>
         parseTransaction(x.data, baseId + "-" + index)
       )
-      .filter((x: Transaction) => x !== null);
+      .filter((x: Transaction | null) => x !== null);
 
-    const deselectedAccounts = (objStore.get('disabled-accounts') ?? []) as Array<string>;
+    const deselectedAccounts = (objStore.get("disabled-accounts") ?? []) as Array<string>;
     
     ym("reachGoal", "OpenData");
-    PutTransactions(transactions, deselectedAccounts);
+    putTransactions(transactions as Transaction[], deselectedAccounts);
   };
 
   const parseTransaction = (data: any, id: string): Transaction | null => {
@@ -73,7 +74,7 @@ function FilePanel({ PutTransactions }: Props) {
   };
 
   const handleOnRemoveFile = (data: any) => {
-    PutTransactions([]);
+    putTransactions([]);
   };
 
   const handleRemoveFile = (ref: any, e: any) => {
@@ -102,8 +103,8 @@ function FilePanel({ PutTransactions }: Props) {
         {({ file }: any) => (
           <div className="flex flex-row-reverse mx-auto mt-5">
             <div className="flex w-64">
-              <PrimaryButton text={t('file-load')} onClick={(e) => handleOpenDialog(csvEl, e)} />
-              <SecondaryButton text={t('file-clear')} onClick={(e) => handleRemoveFile(csvEl, e)} />
+              <PrimaryButton text={t("file-load")} onClick={(e) => handleOpenDialog(csvEl, e)} />
+              <SecondaryButton text={t("file-clear")} onClick={(e) => handleRemoveFile(csvEl, e)} />
             </div>
             <div className="w-80 py-auto border-2 border-gray-300 mr-1 align-middle px-2 overflow-ellipsis overflow-hidden">
               {file && file.name}

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import * as objStore from "store";
 
-import { AccountSelectionChange } from "./../redux/actionCreators";
+import { accountSelectionChange } from "./../redux/actionCreators";
 import { Account } from "./../models";
 import { AccountIcon, CheckBox } from "./elements";
 
@@ -11,7 +11,7 @@ interface OwnProps {
   account: Account;
 }
 
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ AccountSelectionChange }, dispatch);
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({ accountSelectionChange }, dispatch);
 const mapStateToProps = () => ({});
 
 const mergeProps = (
@@ -24,15 +24,15 @@ const mergeProps = (
 
 type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mergeProps>;
 
-function AccountRow({ account, AccountSelectionChange }: Props) {
+function AccountRow({ account, accountSelectionChange }: Props) {
   const onAccountChanged = (state: boolean): void => {
-    const deselected = (objStore.get('disabled-accounts') ?? []) as Array<string>;
+    const deselected = (objStore.get("disabled-accounts") ?? []) as Array<string>;
     const newDeselectedAccounts = deselected.filter(a => a !== account.name);
     if (!state){
       newDeselectedAccounts.push(account.name);
     }
-    objStore.set('disabled-accounts', newDeselectedAccounts);
-    AccountSelectionChange(account.name, state)
+    objStore.set("disabled-accounts", newDeselectedAccounts);
+    accountSelectionChange(account.name, state)
   }
 
   return (

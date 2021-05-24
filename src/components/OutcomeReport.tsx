@@ -5,10 +5,10 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { useTranslation } from "react-i18next";
 
 import {
-  AddReportRow,
-  DeleteSelectedReportRow,
-  SelectReportRow,
-  RenameReportName,
+  addReportRow,
+  deleteSelectedReportRow,
+  selectReportRow,
+  renameReportName,
 } from "./../redux/actionCreators";
 import { List, PrimaryButton, SecondaryButton } from "./elements";
 import { AmountRow } from "./";
@@ -25,32 +25,32 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
   bindActionCreators(
     {
-      RenameReportName,
-      AddReportRow,
-      DeleteSelectedReportRow,
-      SelectReportRow,
+      renameReportName,
+      addReportRow,
+      deleteSelectedReportRow,
+      selectReportRow,
     },
     dispatch
   );
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
 const OutcomeReport: FC<Props> = ({
-  AddReportRow,
-  DeleteSelectedReportRow,
-  SelectReportRow,
+  addReportRow,
+  deleteSelectedReportRow,
+  selectReportRow,
   selectedReportType,
   selectedReportRow,
   reportRows,
   transactions,
-  RenameReportName,
+  renameReportName,
 }) => {
   const { t } = useTranslation();
   const reportAmounts = sumTransactionsByReports(transactions);
   const isRestSelected = selectedReportType === ReportType.outcome && selectedReportRow === undefined;
   const addReport = () => {
     const id = genId();
-    AddReportRow({ id: id, name: t("outcome") }, ReportType.outcome);
-    SelectReportRow(id);
+    addReportRow({ id: id, name: t("outcome") }, ReportType.outcome);
+    selectReportRow(id);
   };
 
   return (
@@ -60,9 +60,9 @@ const OutcomeReport: FC<Props> = ({
           <AmountRow
             title={r.name}
             amount={Math.abs(reportAmounts[r.id] ?? 0)}
-            onClick={() => SelectReportRow(r.id)}
+            onClick={() => selectReportRow(r.id)}
             editType="title"
-            onChanged={(title) => RenameReportName(r.id, title as string)}
+            onChanged={(title) => renameReportName(r.id, title as string)}
             isSelected={r.id === selectedReportRow?.id}
             key={r.id}
           />
@@ -71,14 +71,14 @@ const OutcomeReport: FC<Props> = ({
           title={t("other")}
           amount={Math.abs(reportAmounts["unreported"])}
           editType="hideIcon"
-          onClick={() => SelectReportRow(ReportType.outcome)}
+          onClick={() => selectReportRow(ReportType.outcome)}
           isSelected={isRestSelected}
           key="outcome"
         />
       </List>
       <div className="flex mt-2">
         <PrimaryButton text={t("add")} onClick={addReport} />
-        <SecondaryButton text={t("delete")} onClick={DeleteSelectedReportRow} disabled={isRestSelected || selectedReportType !== ReportType.outcome}/>
+        <SecondaryButton text={t("delete")} onClick={deleteSelectedReportRow} disabled={isRestSelected || selectedReportType !== ReportType.outcome}/>
       </div>
     </>
   );

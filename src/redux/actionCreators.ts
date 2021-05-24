@@ -25,7 +25,7 @@ import {
   SET_SAVING_AMOUNT,
 } from "./actions";
 
-export function PutTransactions(
+export function putTransactions(
   transactions: Transaction[],
   deselectedAccounts: string[] = []
 ): ActionCreator<ActionTypes> {
@@ -38,7 +38,7 @@ export function PutTransactions(
   };
 }
 
-export function SelectReportRow(
+export function selectReportRow(
   reportRowId: string
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
@@ -50,7 +50,7 @@ export function SelectReportRow(
   };
 }
 
-export function AddReportRow(
+export function addReportRow(
   row: ReportRow,
   reportType: ReportType
 ): ActionCreator<ActionTypes> {
@@ -63,7 +63,7 @@ export function AddReportRow(
   };
 }
 
-export function DeleteSelectedReportRow(): ActionCreator<ActionTypes> {
+export function deleteSelectedReportRow(): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
     const action: DeleteReportRowAction = {
       type: DELETE_REPORT_ROW,
@@ -73,7 +73,7 @@ export function DeleteSelectedReportRow(): ActionCreator<ActionTypes> {
   };
 }
 
-export function RenameReportName(
+export function renameReportName(
   id: string,
   name: string
 ): ActionCreator<ActionTypes> {
@@ -86,7 +86,7 @@ export function RenameReportName(
   };
 }
 
-export function AddTransactionsToSelectedReport(
+export function addTransactionsToSelectedReport(
   transactionIDs: string[]
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
@@ -98,7 +98,7 @@ export function AddTransactionsToSelectedReport(
   };
 }
 
-export function RemoveTransactionsFromSelectedReport(
+export function removeTransactionsFromSelectedReport(
   transactionIDs: string[]
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
@@ -110,7 +110,7 @@ export function RemoveTransactionsFromSelectedReport(
   };
 }
 
-export function AccountSelectionChange(
+export function accountSelectionChange(
   accountId: string,
   selection: boolean
 ): ActionCreator<ActionTypes> {
@@ -123,7 +123,7 @@ export function AccountSelectionChange(
   };
 }
 
-export function SelectTransaction(
+export function selectTransaction(
   transactionId: string
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {
@@ -135,7 +135,7 @@ export function SelectTransaction(
   };
 }
 
-export function SetSavingsAmount(
+export function setSavingsAmount(
   amount: number
 ): ActionCreator<ActionTypes> {
   return (dispatch: Dispatch<ActionTypes>) => {

@@ -1,22 +1,32 @@
 import { ActionTypes } from "./actions";
 import reducer, { State } from "./reducer";
 import { createStore, Store } from "redux";
-import { AccountSelectionChange, AddReportRow, AddTransactionsToSelectedReport, DeleteSelectedReportRow, PutTransactions, RemoveTransactionsFromSelectedReport, RenameReportName, SelectReportRow, SelectTransaction } from "./actionCreators";
+import {
+  accountSelectionChange,
+  addReportRow,
+  addTransactionsToSelectedReport,
+  deleteSelectedReportRow,
+  putTransactions,
+  removeTransactionsFromSelectedReport,
+  renameReportName,
+  selectReportRow,
+  selectTransaction,
+} from "./actionCreators";
 import { ReportType } from "../models/ReportType";
 
 const createStoreWithData = ():Store<State, ActionTypes> => {
     const store: Store<State, ActionTypes> = createStore(reducer);
-    PutTransactions([
+    putTransactions([
         {account: "1", id: "2", amount: 3000, category: "4", subCategory: "5", comment: "6", place: "7", time: 8, reportId: "r1"},
         {account: "11", id: "12", amount: 13000, category: "14", subCategory: "15", comment: "16", place: "17", time: 18, reportId: "r2"},
       ])(store.dispatch);
 
-    AddReportRow({id:"r1", name: "rep row 1"}, ReportType.income)(store.dispatch);
-    AddReportRow({id:"r2", name: "rep row 2"}, ReportType.outcome)(store.dispatch);
+    addReportRow({id:"r1", name: "rep row 1"}, ReportType.income)(store.dispatch);
+    addReportRow({id:"r2", name: "rep row 2"}, ReportType.outcome)(store.dispatch);
 
-    SelectReportRow("r1")(store.dispatch);
-    SelectTransaction("12")(store.dispatch);
-    AccountSelectionChange("1", false)(store.dispatch);
+    selectReportRow("r1")(store.dispatch);
+    selectTransaction("12")(store.dispatch);
+    accountSelectionChange("1", false)(store.dispatch);
 
     return store;
 }
@@ -24,7 +34,7 @@ const createStoreWithData = ():Store<State, ActionTypes> => {
 describe("test reducer", () => {
   it("PutTransactions should put transactions", () => {
     const store: Store<State, ActionTypes> = createStore(reducer);
-    const action = PutTransactions([
+    const action = putTransactions([
       {account: "1", id: "2", amount: 3000, category: "4", subCategory: "5", comment: "6", place: "7", time: 8, reportId: undefined},
       {account: "11", id: "12", amount: 13000, category: "14", subCategory: "15", comment: "16", place: "17", time: 18, reportId: undefined},
     ]);
@@ -37,7 +47,7 @@ describe("test reducer", () => {
 
   it("PutTransactions should clear transactions", () => {
     const store = createStoreWithData();
-    const action = PutTransactions([]);
+    const action = putTransactions([]);
 
     action(store.dispatch);
 
@@ -47,7 +57,7 @@ describe("test reducer", () => {
 
   it("PutTransactions should create accounts", () => {
     const store: Store<State, ActionTypes> = createStore(reducer);
-    const action = PutTransactions([
+    const action = putTransactions([
       {account: "1", id: "2", amount: 3000, category: "4", subCategory: "5", comment: "6", place: "7", time: 8, reportId: undefined},
       {account: "11", id: "12", amount: 13000, category: "14", subCategory: "15", comment: "16", place: "17", time: 18, reportId: undefined},
       {account: "1", id: "12s", amount: 1300, category: "14", subCategory: "15", comment: "16", place: "17", time: 18, reportId: undefined},
@@ -63,7 +73,7 @@ describe("test reducer", () => {
 
   it("SelectReportRow should select a report row", () => {
     const store = createStoreWithData();
-    const action = SelectReportRow("r2");
+    const action = selectReportRow("r2");
 
     action(store.dispatch);
 
@@ -73,7 +83,7 @@ describe("test reducer", () => {
 
   it("SelectReportRow should not select a report row if it doesn't exist", () => {
     const store: Store<State, ActionTypes> = createStoreWithData();
-    const action = SelectReportRow("rowId2");
+    const action = selectReportRow("rowId2");
 
     action(store.dispatch);
 
@@ -83,7 +93,7 @@ describe("test reducer", () => {
 
   it("SelectTransaction should select transaction", () => {
     const store = createStoreWithData();
-    const action = SelectTransaction("2");
+    const action = selectTransaction("2");
 
     action(store.dispatch);
 
@@ -93,7 +103,7 @@ describe("test reducer", () => {
 
   it("SelectTransaction should not select transaction if it doesn't exist", () => {
     const store = createStoreWithData();
-    const action = SelectTransaction("22");
+    const action = selectTransaction("22");
 
     action(store.dispatch);
 
@@ -103,7 +113,7 @@ describe("test reducer", () => {
 
   it("AccountSelectionChange should select account", () => {
     const store = createStoreWithData();
-    const action = AccountSelectionChange("1", true);
+    const action = accountSelectionChange("1", true);
 
     action(store.dispatch);
 
@@ -113,7 +123,7 @@ describe("test reducer", () => {
 
   it("AccountSelectionChange should deselect account", () => {
     const store = createStoreWithData();
-    const action = AccountSelectionChange("11", false);
+    const action = accountSelectionChange("11", false);
 
     action(store.dispatch);
 
@@ -123,7 +133,7 @@ describe("test reducer", () => {
 
   it("RemoveTransactionsFromSelectedReport should remove transactions from selected report", () => {
     const store = createStoreWithData();
-    const action = RemoveTransactionsFromSelectedReport(["12"]);
+    const action = removeTransactionsFromSelectedReport(["12"]);
 
     action(store.dispatch);
 
@@ -133,8 +143,8 @@ describe("test reducer", () => {
 
   it("AddTransactionsToSelectedReport should add transactions to selected report", () => {
     const store = createStoreWithData();
-    SelectReportRow("r2")(store.dispatch);
-    const action = AddTransactionsToSelectedReport(["2"]);
+    selectReportRow("r2")(store.dispatch);
+    const action = addTransactionsToSelectedReport(["2"]);
 
     action(store.dispatch);
 
@@ -145,7 +155,7 @@ describe("test reducer", () => {
 
   it("RenameReportName should change income report name", () => {
     const store = createStoreWithData();
-    const action = RenameReportName("r1", "repxxx");
+    const action = renameReportName("r1", "repxxx");
 
     action(store.dispatch);
 
@@ -155,7 +165,7 @@ describe("test reducer", () => {
 
   it("RenameReportName should change outcome report name", () => {
     const store = createStoreWithData();
-    const action = RenameReportName("r2", "repxxx");
+    const action = renameReportName("r2", "repxxx");
 
     action(store.dispatch);
 
@@ -165,8 +175,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should delete income report row", () => {
     const store = createStoreWithData();
-    SelectReportRow("r1")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    selectReportRow("r1")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -176,8 +186,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should delete outcome report row", () => {
     const store = createStoreWithData();
-    SelectReportRow("r2")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    selectReportRow("r2")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -187,9 +197,9 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should select next income report row if deleted is selected", () => {
     const store = createStoreWithData();
-    AddReportRow({id:"r2", name: "rep row 1"}, ReportType.income)(store.dispatch);
-    SelectReportRow("r1")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    addReportRow({id:"r2", name: "rep row 1"}, ReportType.income)(store.dispatch);
+    selectReportRow("r1")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -199,9 +209,9 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should select prev income report row if deleted is selected and it's the last", () => {
     const store = createStoreWithData();
-    AddReportRow({id:"r12", name: "rep row 1"}, ReportType.income)(store.dispatch);
-    SelectReportRow("r1")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    addReportRow({id:"r12", name: "rep row 1"}, ReportType.income)(store.dispatch);
+    selectReportRow("r1")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -211,8 +221,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should select undef if it's income single", () => {
     const store = createStoreWithData();
-    SelectReportRow("r1")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    selectReportRow("r1")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -223,9 +233,9 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should select next outcome report row if deleted is selected", () => {
     const store = createStoreWithData();
-    AddReportRow({id:"r22", name: "rep row 1"}, ReportType.outcome)(store.dispatch);
-    SelectReportRow("r2")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    addReportRow({id:"r22", name: "rep row 1"}, ReportType.outcome)(store.dispatch);
+    selectReportRow("r2")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -235,9 +245,9 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should select prev outcome report row if deleted is selected and it's the last", () => {
     const store = createStoreWithData();
-    AddReportRow({id:"r22", name: "rep row 1"}, ReportType.outcome)(store.dispatch);
-    SelectReportRow("r22")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    addReportRow({id:"r22", name: "rep row 1"}, ReportType.outcome)(store.dispatch);
+    selectReportRow("r22")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -247,8 +257,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should select undef if it's outcome single", () => {
     const store = createStoreWithData();
-    SelectReportRow("r2")(store.dispatch);
-    const action = DeleteSelectedReportRow()
+    selectReportRow("r2")(store.dispatch);
+    const action = deleteSelectedReportRow()
 
     action(store.dispatch);
 
@@ -258,8 +268,8 @@ describe("test reducer", () => {
 
   it("DeleteReportRow should remove transactions from the report", () => {
     const store = createStoreWithData();
-    SelectReportRow("r1")(store.dispatch);
-    const action = DeleteSelectedReportRow();
+    selectReportRow("r1")(store.dispatch);
+    const action = deleteSelectedReportRow();
 
     action(store.dispatch);
 
@@ -269,7 +279,7 @@ describe("test reducer", () => {
 
   it("AddReportRow should create income report row", () => {
     const store = createStoreWithData();
-    const action = AddReportRow({id: "rx1", name: "name1"}, ReportType.income);
+    const action = addReportRow({id: "rx1", name: "name1"}, ReportType.income);
 
     action(store.dispatch);
 
@@ -280,7 +290,7 @@ describe("test reducer", () => {
 
   it("AddReportRow should create outcome report row", () => {
     const store = createStoreWithData();
-    const action = AddReportRow({id: "rx1", name: "name1"}, ReportType.outcome);
+    const action = addReportRow({id: "rx1", name: "name1"}, ReportType.outcome);
 
     action(store.dispatch);
 
@@ -291,7 +301,7 @@ describe("test reducer", () => {
 
   it("AddReportRow should create empty report", () => {
     const store = createStoreWithData();
-    const action = AddReportRow({id: "rx1", name: "name1"}, ReportType.outcome);
+    const action = addReportRow({id: "rx1", name: "name1"}, ReportType.outcome);
 
     action(store.dispatch);
 

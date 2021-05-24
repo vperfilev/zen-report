@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 
 import {List} from "./elements";
 import {
-  SelectTransaction,
-  RemoveTransactionsFromSelectedReport,
-  AddTransactionsToSelectedReport,
+  selectTransaction,
+  removeTransactionsFromSelectedReport,
+  addTransactionsToSelectedReport,
 } from "./../redux/actionCreators";
 import { TransactionHeaderRow, TransactionRow } from "./";
 import { getSelectedAccountsTransactions } from "../utils/dataFunc";
@@ -24,9 +24,9 @@ const mapStateToProps = (state: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
   bindActionCreators(
     {
-      SelectTransaction,
-      RemoveTransactionsFromSelectedReport,
-      AddTransactionsToSelectedReport,
+      selectTransaction,
+      removeTransactionsFromSelectedReport,
+      addTransactionsToSelectedReport,
     },
     dispatch
   );
@@ -39,9 +39,9 @@ function TransactionList({
   selectedReportType,
   selectedReport,
   selectedTransactionId,
-  SelectTransaction,
-  RemoveTransactionsFromSelectedReport,
-  AddTransactionsToSelectedReport,
+  selectTransaction,
+  removeTransactionsFromSelectedReport,
+  addTransactionsToSelectedReport,
 }: Props) {
   const { t } = useTranslation();
   const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType).filter(t=>t.reportId === selectedReport?.id || t.reportId === undefined);
@@ -52,9 +52,9 @@ function TransactionList({
 
   const handleTransactionsChanges = (ids: string[], state: boolean) => {
     if (state) {
-      AddTransactionsToSelectedReport(ids);
+      addTransactionsToSelectedReport(ids);
     } else {
-      RemoveTransactionsFromSelectedReport(ids);
+      removeTransactionsFromSelectedReport(ids);
     }
   };
 
@@ -110,7 +110,7 @@ function TransactionList({
         selectionChange={(id, state) => handleTransactionsChanges([id], state)}
         key={transaction.id}
         isSelected={selectedTransactionId === transaction.id}
-        rowSelected={(id) => SelectTransaction(id)}
+        rowSelected={(id) => selectTransaction(id)}
       />
     );
   }

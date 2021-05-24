@@ -5,11 +5,11 @@ import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { useTranslation } from "react-i18next";
 
 import {
-  SetSavingsAmount,
-  AddReportRow,
-  DeleteSelectedReportRow,
-  SelectReportRow,
-  RenameReportName,
+  setSavingsAmount,
+  addReportRow,
+  deleteSelectedReportRow,
+  selectReportRow,
+  renameReportName,
 } from "./../redux/actionCreators";
 import { List, PrimaryButton, SecondaryButton } from "./elements";
 import { AmountRow } from "./";
@@ -31,11 +31,11 @@ const mapStateToProps = (s: State) => ({
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
   bindActionCreators(
     {
-      SetSavingsAmount,
-      RenameReportName,
-      AddReportRow,
-      DeleteSelectedReportRow,
-      SelectReportRow,
+      setSavingsAmount,
+      renameReportName,
+      addReportRow,
+      deleteSelectedReportRow,
+      selectReportRow,
     },
     dispatch
   );
@@ -45,15 +45,15 @@ type Props = ReturnType<typeof mapStateToProps> &
 
 const IncomeReport: FC<Props> = ({
   savings,
-  SetSavingsAmount,
-  AddReportRow,
-  DeleteSelectedReportRow,
-  SelectReportRow,
+  setSavingsAmount,
+  addReportRow,
+  deleteSelectedReportRow,
+  selectReportRow,
   selectedReportType,
   selectedReportRow,
   reportRows,
   transactions,
-  RenameReportName,
+  renameReportName,
 }) => {
   const { t } = useTranslation();
   const reportAmounts = sumTransactionsByReports(transactions);
@@ -61,8 +61,8 @@ const IncomeReport: FC<Props> = ({
 
   const addNewReportRow = () => {
     const id = genId();
-    AddReportRow({ id: id, name: t("income") }, ReportType.income);
-    SelectReportRow(id);
+    addReportRow({ id: id, name: t("income") }, ReportType.income);
+    selectReportRow(id);
   };
 
   return (
@@ -72,9 +72,9 @@ const IncomeReport: FC<Props> = ({
           <AmountRow
             title={r.name}
             amount={reportAmounts[r.id] ?? 0}
-            onClick={() => SelectReportRow(r.id)}
+            onClick={() => selectReportRow(r.id)}
             editType="title"
-            onChanged={(title) => RenameReportName(r.id, title as string)}
+            onChanged={(title) => renameReportName(r.id, title as string)}
             isSelected={r.id === selectedReportRow?.id}
             key={r.id}
           />
@@ -83,7 +83,7 @@ const IncomeReport: FC<Props> = ({
           title={t("other")}
           amount={reportAmounts["unreported"]}
           editType="hideIcon"
-          onClick={() => SelectReportRow(ReportType.income)}
+          onClick={() => selectReportRow(ReportType.income)}
           isSelected={isRestSelected}
           key="income"
         />
@@ -91,7 +91,7 @@ const IncomeReport: FC<Props> = ({
           title={t("savings")}
           amount={savings}
           editType="amount"
-          onChanged={(value) => SetSavingsAmount(value as number)}
+          onChanged={(value) => setSavingsAmount(value as number)}
           key="savings"
         />
       </List>
@@ -102,7 +102,7 @@ const IncomeReport: FC<Props> = ({
         />
         <SecondaryButton
           text={t("delete")}
-          onClick={DeleteSelectedReportRow}
+          onClick={deleteSelectedReportRow}
           disabled={isRestSelected || selectedReportType !== ReportType.income}
         />
       </div>
