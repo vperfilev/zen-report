@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 
 import { formatAmount } from "../utils/formatters";
 import { CheckBox } from "./elements";
@@ -13,7 +13,7 @@ interface Props {
   selectionIsEnabled: boolean;
 }
 
-export function TransactionHeaderRow({
+export const TransactionHeaderRow: FC<Props> = ({
   checked,
   onChange,
   transactionIds,
@@ -21,7 +21,7 @@ export function TransactionHeaderRow({
   transactionSum,
   level,
   selectionIsEnabled
-}: Props) {
+}) => {
   return (
     <div className="flex flex-grow py-2 px-2" style={{backgroundColor: level === 0 ? "rgb(147, 197, 253)" : "rgb(191, 219, 254)"}}>
       <CheckBox enabled={selectionIsEnabled} checked={checked} changed={(state:boolean) => onChange(transactionIds, state)}/>

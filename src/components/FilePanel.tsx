@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import { CSVReader } from "react-papaparse";
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
 
 type Props = ReturnType<typeof mapDispatchToProps>;
 
-function FilePanel({ putTransactions }: Props) {
+const FilePanel: FC<Props> = ({ putTransactions }) => {
   const csvEl = React.useRef(null);
   const { t } = useTranslation();
 

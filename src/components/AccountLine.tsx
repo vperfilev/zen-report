@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
 import * as objStore from "store";
@@ -24,7 +24,7 @@ const mergeProps = (
 
 type Props = ReturnType<typeof mapDispatchToProps> & ReturnType<typeof mergeProps>;
 
-function AccountLine({ account, accountSelectionChange }: Props) {
+const AccountLine: FC<Props> = ({ account, accountSelectionChange }) =>{
   const onAccountChanged = (state: boolean): void => {
     const deselected = (objStore.get("disabled-accounts") ?? []) as Array<string>;
     const newDeselectedAccounts = deselected.filter(a => a !== account.name);

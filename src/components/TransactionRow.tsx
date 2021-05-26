@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 import { Transaction } from "../models";
 import { formatAmount, formatDate } from "../utils/formatters";
 import { AccountIcon, CheckBox } from "./elements";
@@ -13,7 +13,7 @@ interface Props {
   isSelected: boolean;
 }
 
-export function TransactionRow({ data, isChecked, selectionChange, accountColor, selectionIsEnabled, isSelected, rowSelected}: Props) {
+export const TransactionRow: FC<Props> = ({ data, isChecked, selectionChange, accountColor, selectionIsEnabled, isSelected, rowSelected}) => {
   return (
     <div className={"flex flex-grow pr-1 py-2 px-2 hover:bg-blue-100" + (isSelected ? " bg-blue-100" : "")}>
       <CheckBox enabled={selectionIsEnabled} checked={isChecked} changed={(state: boolean) => selectionChange(data.id, state)} />

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
@@ -11,7 +11,7 @@ const mapStateToProps = (state: State) => ({ accounts: state.accounts });
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => bindActionCreators({}, dispatch);
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
 
-function AccountsPanel({ accounts }: Props) {
+const AccountsPanel: FC<Props> = ({ accounts }) => {
   const { t } = useTranslation();
   return (
     <div>

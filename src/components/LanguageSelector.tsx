@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-interface Props {}
 
-export const LanguageSelector: FC<Props> = () => {
+export const LanguageSelector: FC = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (language: string) => {

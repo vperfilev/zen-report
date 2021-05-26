@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 
 interface Props {
     title: string;
@@ -6,7 +6,7 @@ interface Props {
     mutedValue: boolean;
 }
 
-export function DetailsRow ({title, value, mutedValue }: Props) {
+export const DetailsRow: FC<Props> = ({title, value, mutedValue }) => {
   return (
     <div className="py-2 px-2">
         <span className="text-gray-900 mr-2 font-bold">{title}:&nbsp;</span>

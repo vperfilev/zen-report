@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {FC} from "react";
 import { State } from "../redux/reducer";
 import { connect } from "react-redux";
 import { AnyAction, bindActionCreators, Dispatch } from "redux";
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) =>
 type Props = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;
 
-function TransactionList({
+const TransactionList: FC<Props> = ({
   transactions,
   accounts,
   selectedReportType,
@@ -42,7 +42,7 @@ function TransactionList({
   selectTransaction,
   removeTransactionsFromSelectedReport,
   addTransactionsToSelectedReport,
-}: Props) {
+}) => {
   const { t } = useTranslation();
   const filteredTransactions = getSelectedAccountsTransactions(transactions, accounts, selectedReportType).filter(t=>t.reportId === selectedReport?.id || t.reportId === undefined);
   
