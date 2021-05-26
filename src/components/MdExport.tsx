@@ -79,7 +79,7 @@ const MdExport: FC<Props> = ({savings, incomeTransactions, incomeReport, outcome
     let incomeReportData = getReportBody(incomeReport, sumTransactionsByReports(incomeTransactions));
     if (savings !== 0) incomeReportData.push({name: t("savings"), amount: savings.toFixed(2)});
     incomeReportData = addAdditionalRows(incomeReportData, incomeTransactions, t("source"), t("amount"), savings);
-    const incomeMdReport = fillReport(incomeReportData, t("Earned"));
+    const incomeMdReport = fillReport(incomeReportData, t("incomes"));
     
     let outcomeReportData = getReportBody(outcomeReport, sumTransactionsByReports(outcomeTransactions));
     outcomeReportData = addAdditionalRows(outcomeReportData, outcomeTransactions, t("outcome"), t("amount"));
